@@ -4,11 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "keywords": [
     "chrome-extension"
   ],
   "author": "lky",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "conventional-changelog": "^3.1.23",
+    "cz-conventional-changelog": "^3.2.1",
+    "husky": "^4.2.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
