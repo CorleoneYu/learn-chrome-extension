@@ -1,0 +1,14 @@
+{
+  "name": "learn-chrome-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "commit": "cz"
+  },
+  "keywords": [
+    "chrome-extension"
+  ],
+  "author": "lky",
+  "license": "ISC"
+}
