@@ -1,23 +1,42 @@
 {
-  "name": "learn-chrome-extension",
-  "version": "1.0.0",
-  "description": "",
+  "name": "chrome-extension-sheet",
+  "version": "0.1.0",
+  "description": "sheet developer tools",
   "main": "index.js",
   "scripts": {
     "commit": "cz",
-    "version": "node ./node_modules/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+    "version": "node ./node_modules/conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "webpack -w --config webpack.dev.js"
   },
   "keywords": [
     "chrome-extension"
   ],
-  "author": "lky",
+  "author": "kanalin",
   "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^9.1.2",
     "conventional-changelog": "^3.1.23",
     "cz-conventional-changelog": "^3.2.1",
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "@types/chrome": "^0.0.122",
+    "@types/react": "^16.9.48",
+    "@types/react-dom": "^16.9.8",
+    "css-loader": "^4.2.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.1",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.1.3"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "config": {
     "commitizen": {
