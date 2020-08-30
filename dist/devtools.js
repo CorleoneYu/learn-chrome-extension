@@ -1,6 +1,6 @@
 chrome.devtools.panels.create(
     'Sheet',
-    './regular.png',
+    './icon.png',
     './panel.html',
     function(panel) {
         console.log('panel', panel);

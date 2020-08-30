@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/popup/index.tsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/panel/index.tsx");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -28601,89 +28601,50 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/popup/Popup.tsx":
+/***/ "./src/panel/Panel.tsx":
 /*!*****************************!*\
-  !*** ./src/popup/Popup.tsx ***!
+  !*** ./src/panel/Panel.tsx ***!
   \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-function Popup() {
-    react_1.useEffect(function () {
-        // Example of how to send a message to eventPage.ts.
-        chrome.runtime.sendMessage({ popupMounted: true });
-    }, []);
-    return react_1.default.createElement("div", { className: "popupContainer" }, "Hello, Popup!");
-}
-exports.default = Popup;
-
-
-/***/ }),
-
-/***/ "./src/popup/index.tsx":
-/*!*****************************!*\
-  !*** ./src/popup/index.tsx ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var ReactDOM = __importStar(__webpack_require__(/*! react-dom */ "./node_modules/_react-dom@16.13.1@react-dom/index.js"));
-var Popup_1 = __importDefault(__webpack_require__(/*! ./Popup */ "./src/popup/Popup.tsx"));
-chrome.tabs.query({ active: true, currentWindow: true }, function (tab) {
-    ReactDOM.render(React.createElement(Popup_1.default, null), document.getElementById('popup'));
-});
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+function Panel() {
+    return react_1.default.createElement("div", { className: "panel-container" }, "Hello, Panel!");
+}
+exports.default = Panel;
+
+
+/***/ }),
+
+/***/ "./src/panel/index.tsx":
+/*!*****************************!*\
+  !*** ./src/panel/index.tsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/_react-dom@16.13.1@react-dom/index.js"));
+var Panel_1 = __importDefault(__webpack_require__(/*! ./Panel */ "./src/panel/Panel.tsx"));
+window.onload = function () {
+    react_dom_1.default.render(react_1.default.createElement(Panel_1.default, null), document.getElementById('panel'));
+};
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=popup.js.map
+//# sourceMappingURL=panel.js.map
