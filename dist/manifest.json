@@ -15,6 +15,10 @@
     "default_popup": "popup.html"
   },
 
+  "background": {
+		"scripts": ["js/background.js"]
+  },
+
   "devtools_page": "devtools.html",
 
   "content_scripts": [{

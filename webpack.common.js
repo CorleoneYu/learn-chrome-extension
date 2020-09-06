@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: {
     popup: path.join(__dirname, "src/popup/index.tsx"),
-    eventPage: path.join(__dirname, "src/eventPage.ts"),
+    background: path.join(__dirname, "src/background.ts"),
     panel: path.join(__dirname, "src/panel/index.tsx"),
   },
   output: {
@@ -20,17 +20,15 @@ module.exports = {
       {
         exclude: /node_modules/,
         test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader" // Creates style nodes from JS strings
-          },
-          {
-            loader: "css-loader" // Translates CSS into CommonJS
-          },
-          {
-            loader: "sass-loader" // Compiles Sass to CSS
-          }
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.svg$/,
+        use: "file-loader",
       }
     ]
   },

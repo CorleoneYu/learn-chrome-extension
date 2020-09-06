@@ -81,30 +81,24 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/eventPage.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/background.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/eventPage.ts":
-/*!**************************!*\
-  !*** ./src/eventPage.ts ***!
-  \**************************/
+/***/ "./src/background.ts":
+/*!***************************!*\
+  !*** ./src/background.ts ***!
+  \***************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Listen to messages sent from other parts of the extension.
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    // onMessage must return "true" if response is async.
-    var isResponseAsync = false;
-    if (request.popupMounted) {
-        console.log('eventPage notified that Popup.tsx has mounted.');
-    }
-    return isResponseAsync;
+chrome.runtime.onInstalled.addListener(function () {
+    console.log('installed!!!');
 });
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=eventPage.js.map
+//# sourceMappingURL=background.js.map
