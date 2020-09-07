@@ -20,7 +20,6 @@ class JsonEditor extends PureComponent {
       String: 'Hello World',
     };
 
-    console.log('editorRef', this.editorRef);
     this.editor = new JSONEditor(this.editorRef, options);
     this.editor.set(json);
   };
@@ -36,17 +35,11 @@ class JsonEditor extends PureComponent {
   }
 
   setEditorRef = (ref) => {
-    console.log('ref', ref);
     this.editorRef = ref;
   };
 
   render() {
-    return (
-      <div>
-        <h1>editor</h1>
-        <div className="editor-container" ref={this.setEditorRef} />
-      </div>
-    );
+    return <div className="editor-container" ref={this.setEditorRef} />;
   }
 }
 export default JsonEditor;

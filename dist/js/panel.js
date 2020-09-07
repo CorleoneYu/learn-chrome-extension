@@ -28657,6 +28657,28 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/constant/event.ts":
+/*!*******************************!*\
+  !*** ./src/constant/event.ts ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EVENT_TYPE = void 0;
+var EVENT_TYPE;
+(function (EVENT_TYPE) {
+    EVENT_TYPE["SEND_PANEL_CONTENT"] = "panel-send-to-content";
+    EVENT_TYPE["RESPONSE_CONTENT_PANEL"] = "content-response-to-panel";
+    EVENT_TYPE["SEND_CONTENT_INJECT"] = "content-send-to-inject";
+    EVENT_TYPE["RESPONSE_INJECT_CONTENT"] = "inject-response-to-content";
+})(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
+
+
+/***/ }),
+
 /***/ "./src/panel/Panel.tsx":
 /*!*****************************!*\
   !*** ./src/panel/Panel.tsx ***!
@@ -28666,16 +28688,63 @@ if (false) {} else {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
 var json_editor_1 = __importDefault(__webpack_require__(/*! ./componnet/json-editor */ "./src/panel/componnet/json-editor/index.ts"));
+var useInput_1 = __importDefault(__webpack_require__(/*! ./hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
+var event_1 = __webpack_require__(/*! ../constant/event */ "./src/constant/event.ts");
+// import './style.less';
 function Panel() {
-    return react_1.default.createElement("div", { className: "panel-container" },
-        react_1.default.createElement("h1", null, "Hello Panel"),
-        react_1.default.createElement(json_editor_1.default, null));
+    var _a = useInput_1.default(), row = _a[0], RowInput = _a[1];
+    var _b = useInput_1.default(), column = _b[0], ColumnInput = _b[1];
+    var searchData = react_1.useCallback(function () {
+        console.log('searchData', row, column);
+        chrome.runtime.sendMessage({
+            type: event_1.EVENT_TYPE.SEND_PANEL_CONTENT,
+            payload: {
+                row: row,
+                column: column,
+            },
+        }, function (response) {
+            console.log('searchData response', response);
+        });
+    }, [row, column]);
+    return (react_1.default.createElement("div", { className: "panel-container" },
+        react_1.default.createElement("div", { className: "input-box" },
+            react_1.default.createElement("div", { className: "input-container row-input-container" },
+                react_1.default.createElement("span", null,
+                    "\u884C: ",
+                    row),
+                RowInput),
+            react_1.default.createElement("div", { className: "input-container column-input-container" },
+                react_1.default.createElement("span", null,
+                    "\u5217: ",
+                    column),
+                ColumnInput),
+            react_1.default.createElement("button", { className: "search-btn", onClick: searchData }, "\u67E5\u8BE2")),
+        react_1.default.createElement(json_editor_1.default, null)));
 }
 exports.default = Panel;
 
@@ -28748,12 +28817,10 @@ var JsonEditor = /** @class */ (function (_super) {
                 Object: { a: 'b', c: 'd' },
                 String: 'Hello World',
             };
-            console.log('editorRef', _this.editorRef);
             _this.editor = new jsoneditor_1.default(_this.editorRef, options);
             _this.editor.set(json);
         };
         _this.setEditorRef = function (ref) {
-            console.log('ref', ref);
             _this.editorRef = ref;
         };
         return _this;
@@ -28767,9 +28834,7 @@ var JsonEditor = /** @class */ (function (_super) {
         }
     };
     JsonEditor.prototype.render = function () {
-        return (react_1.default.createElement("div", null,
-            react_1.default.createElement("h1", null, "editor"),
-            react_1.default.createElement("div", { className: "editor-container", ref: this.setEditorRef })));
+        return react_1.default.createElement("div", { className: "editor-container", ref: this.setEditorRef });
     };
     return JsonEditor;
 }(react_1.PureComponent));
@@ -28797,6 +28862,54 @@ exports.default = JsonEditor_1.default;
 
 /***/ }),
 
+/***/ "./src/panel/hooks/useInput.tsx":
+/*!**************************************!*\
+  !*** ./src/panel/hooks/useInput.tsx ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var useInput = function () {
+    var _a = react_1.useState(''), value = _a[0], setValue = _a[1];
+    var handleChange = react_1.useCallback(function (event) {
+        var value = event.target.value;
+        setValue(value);
+    }, []);
+    var InputCom = react_1.default.createElement("input", { value: value, onChange: handleChange });
+    return [
+        value,
+        InputCom,
+        setValue,
+    ];
+};
+exports.default = useInput;
+
+
+/***/ }),
+
 /***/ "./src/panel/index.tsx":
 /*!*****************************!*\
   !*** ./src/panel/index.tsx ***!
@@ -28815,6 +28928,7 @@ var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_m
 var Panel_1 = __importDefault(__webpack_require__(/*! ./Panel */ "./src/panel/Panel.tsx"));
 window.onload = function () {
     react_dom_1.default.render(react_1.default.createElement(Panel_1.default, null), document.getElementById('panel'));
+    chrome.devtools.inspectedWindow.eval('console.log(`inject`, injectData)');
 };
 
 

@@ -3,6 +3,6 @@ chrome.devtools.panels.create(
     './icon.png',
     './panel.html',
     function(panel) {
-        console.log('panel', panel);
+        // console.log('panel', panel);
     }
 )
