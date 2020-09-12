@@ -10,28 +10,29 @@ class JsonEditor extends PureComponent {
       mode: 'view',
       history: true,
     };
-
-    const json = {
-      Array: [1, 2, 3],
-      Boolean: true,
-      Null: null,
-      Number: 123,
-      Object: { a: 'b', c: 'd' },
-      String: 'Hello World',
-    };
-
     this.editor = new JSONEditor(this.editorRef, options);
-    this.editor.set(json);
   };
+
+  handleMessage = (message, sender, sendResponse) => {
+    console.log('panel received', message);
+    const { cellData, cellView } = message.payload;
+    this.editor.set({
+      cellData,
+      cellView,
+    });
+  }
 
   componentDidMount() {
     this.initJsonEditor();
+    chrome.runtime.onMessage.addListener(this.handleMessage);
   }
 
   componentWillUnmount() {
     if (this.editor) {
       this.editor.destroy();
     }
+
+    chrome.runtime.onMessage.removeListener(this.handleMessage);
   }
 
   setEditorRef = (ref) => {

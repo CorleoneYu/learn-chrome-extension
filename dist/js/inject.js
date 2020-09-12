@@ -99,10 +99,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EVENT_TYPE = void 0;
 var EVENT_TYPE;
 (function (EVENT_TYPE) {
-    EVENT_TYPE["SEND_PANEL_CONTENT"] = "panel-send-to-content";
-    EVENT_TYPE["RESPONSE_CONTENT_PANEL"] = "content-response-to-panel";
-    EVENT_TYPE["SEND_CONTENT_INJECT"] = "content-send-to-inject";
-    EVENT_TYPE["RESPONSE_INJECT_CONTENT"] = "inject-response-to-content";
+    EVENT_TYPE["SEND_INJECT_CONTENT"] = "inject-send-to-content";
+    EVENT_TYPE["SEND_CONTENT_PANEL"] = "content-send-to-panel";
 })(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
 
 
@@ -120,28 +118,19 @@ var EVENT_TYPE;
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_1 = __webpack_require__(/*! ./constant/event */ "./src/constant/event.ts");
 console.log('inject!!!');
-var injectData = {
-    name: 'lky',
-    age: 12
+window.getCellData = function (row, column) {
+    var cellData = window.SpreadsheetApp.spreadsheet.activeSheet.data.rowData[row].values[column];
+    var cellView = window.SpreadsheetApp.view.canvas.tableView._cellViews[row][column];
+    console.log('getCellData', row, column, cellData, cellView);
+    var msg = {
+        type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
+        payload: {
+            cellData: cellData,
+            cellView: cellView,
+        },
+    };
+    eval(window.postMessage(msg, '*'));
 };
-window.addEventListener('message', function (e) {
-    console.log('inject received', e.data);
-    switch (e.data.type) {
-        case event_1.EVENT_TYPE.SEND_CONTENT_INJECT:
-            var msg = {
-                type: event_1.EVENT_TYPE.RESPONSE_INJECT_CONTENT,
-                payload: {
-                    data: {
-                        name: 'lky',
-                        age: 12,
-                    },
-                },
-            };
-            window.postMessage(msg, '*');
-        default:
-            break;
-    }
-});
 
 
 /***/ })

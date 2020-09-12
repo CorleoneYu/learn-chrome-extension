@@ -99,10 +99,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EVENT_TYPE = void 0;
 var EVENT_TYPE;
 (function (EVENT_TYPE) {
-    EVENT_TYPE["SEND_PANEL_CONTENT"] = "panel-send-to-content";
-    EVENT_TYPE["RESPONSE_CONTENT_PANEL"] = "content-response-to-panel";
-    EVENT_TYPE["SEND_CONTENT_INJECT"] = "content-send-to-inject";
-    EVENT_TYPE["RESPONSE_INJECT_CONTENT"] = "inject-response-to-content";
+    EVENT_TYPE["SEND_INJECT_CONTENT"] = "inject-send-to-content";
+    EVENT_TYPE["SEND_CONTENT_PANEL"] = "content-send-to-panel";
 })(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
 
 
@@ -141,29 +139,14 @@ var event_1 = __webpack_require__(/*! ./constant/event */ "./src/constant/event.
     s.setAttribute('src', file);
     th.appendChild(s);
 })(chrome.extension.getURL('/js/inject.js'), 'body');
-var responseHandle;
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    console.log('content received chrome', request);
-    switch (request.type) {
-        case event_1.EVENT_TYPE.SEND_PANEL_CONTENT:
-            // panel 向 inject 查询 sheet
-            // content-script 在中间做转发
-            responseHandle = sendResponse;
-            var msg = __assign(__assign({}, request), { type: event_1.EVENT_TYPE.SEND_CONTENT_INJECT });
-            window.postMessage(msg, '*');
-            break;
-        default:
-            break;
-    }
-});
 window.addEventListener('message', function (e) {
     console.log('content received window', e.data);
     switch (e.data.type) {
-        case event_1.EVENT_TYPE.RESPONSE_INJECT_CONTENT:
+        case event_1.EVENT_TYPE.SEND_INJECT_CONTENT:
             // inject 将 sheet 发送给 panel
             // content-script 在中间做转发
-            var msg = __assign(__assign({}, e.data), { type: event_1.EVENT_TYPE.RESPONSE_CONTENT_PANEL });
-            responseHandle(msg);
+            var msg = __assign(__assign({}, e.data), { type: event_1.EVENT_TYPE.SEND_CONTENT_PANEL });
+            chrome.runtime.sendMessage(msg);
             break;
         default:
             break;

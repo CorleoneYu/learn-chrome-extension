@@ -1,27 +1,20 @@
 import { EVENT_TYPE } from './constant/event';
 
 console.log('inject!!!');
-const injectData = {
-    name: 'lky',
-    age: 12
-};
 
-window.addEventListener('message', function (e) {
-    console.log('inject received', e.data);
+declare const window: any;
 
-    switch (e.data.type) {
-        case EVENT_TYPE.SEND_CONTENT_INJECT:
-            const msg = {
-                type: EVENT_TYPE.RESPONSE_INJECT_CONTENT,
-                payload: {
-                    data: {
-                        name: 'lky',
-                        age: 12,
-                    },
-                },
-            };
-            window.postMessage(msg, '*');
-        default:
-            break;
-    }
-});
+window.getCellData = function(row: number, column: number) {
+    const cellData = window.SpreadsheetApp.spreadsheet.activeSheet.data.rowData[row].values[column];
+    const cellView = window.SpreadsheetApp.view.canvas.tableView._cellViews[row][column];
+    console.log('getCellData', row, column, cellData, cellView);
+    const msg = {
+        type: EVENT_TYPE.SEND_INJECT_CONTENT,
+        payload: {
+            cellData,
+            cellView,
+        },
+    };
+
+    eval(window.postMessage(msg, '*'));
+}

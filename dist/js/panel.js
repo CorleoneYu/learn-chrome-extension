@@ -28657,28 +28657,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/constant/event.ts":
-/*!*******************************!*\
-  !*** ./src/constant/event.ts ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.EVENT_TYPE = void 0;
-var EVENT_TYPE;
-(function (EVENT_TYPE) {
-    EVENT_TYPE["SEND_PANEL_CONTENT"] = "panel-send-to-content";
-    EVENT_TYPE["RESPONSE_CONTENT_PANEL"] = "content-response-to-panel";
-    EVENT_TYPE["SEND_CONTENT_INJECT"] = "content-send-to-inject";
-    EVENT_TYPE["RESPONSE_INJECT_CONTENT"] = "inject-response-to-content";
-})(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
-
-
-/***/ }),
-
 /***/ "./src/panel/Panel.tsx":
 /*!*****************************!*\
   !*** ./src/panel/Panel.tsx ***!
@@ -28714,34 +28692,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
 var json_editor_1 = __importDefault(__webpack_require__(/*! ./componnet/json-editor */ "./src/panel/componnet/json-editor/index.ts"));
 var useInput_1 = __importDefault(__webpack_require__(/*! ./hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
-var event_1 = __webpack_require__(/*! ../constant/event */ "./src/constant/event.ts");
 // import './style.less';
 function Panel() {
     var _a = useInput_1.default(), row = _a[0], RowInput = _a[1];
     var _b = useInput_1.default(), column = _b[0], ColumnInput = _b[1];
     var searchData = react_1.useCallback(function () {
         console.log('searchData', row, column);
-        chrome.runtime.sendMessage({
-            type: event_1.EVENT_TYPE.SEND_PANEL_CONTENT,
-            payload: {
-                row: row,
-                column: column,
-            },
-        }, function (response) {
-            console.log('searchData response', response);
-        });
+        chrome.devtools.inspectedWindow.eval("window.getCellData(" + row + ", " + column + ")");
     }, [row, column]);
     return (react_1.default.createElement("div", { className: "panel-container" },
         react_1.default.createElement("div", { className: "input-box" },
             react_1.default.createElement("div", { className: "input-container row-input-container" },
-                react_1.default.createElement("span", null,
-                    "\u884C: ",
-                    row),
+                react_1.default.createElement("span", null, "\u884C: "),
                 RowInput),
             react_1.default.createElement("div", { className: "input-container column-input-container" },
-                react_1.default.createElement("span", null,
-                    "\u5217: ",
-                    column),
+                react_1.default.createElement("span", null, "\u5217: "),
                 ColumnInput),
             react_1.default.createElement("button", { className: "search-btn", onClick: searchData }, "\u67E5\u8BE2")),
         react_1.default.createElement(json_editor_1.default, null)));
@@ -28809,16 +28774,15 @@ var JsonEditor = /** @class */ (function (_super) {
                 mode: 'view',
                 history: true,
             };
-            var json = {
-                Array: [1, 2, 3],
-                Boolean: true,
-                Null: null,
-                Number: 123,
-                Object: { a: 'b', c: 'd' },
-                String: 'Hello World',
-            };
             _this.editor = new jsoneditor_1.default(_this.editorRef, options);
-            _this.editor.set(json);
+        };
+        _this.handleMessage = function (message, sender, sendResponse) {
+            console.log('panel received', message);
+            var _a = message.payload, cellData = _a.cellData, cellView = _a.cellView;
+            _this.editor.set({
+                cellData: cellData,
+                cellView: cellView,
+            });
         };
         _this.setEditorRef = function (ref) {
             _this.editorRef = ref;
@@ -28827,11 +28791,13 @@ var JsonEditor = /** @class */ (function (_super) {
     }
     JsonEditor.prototype.componentDidMount = function () {
         this.initJsonEditor();
+        chrome.runtime.onMessage.addListener(this.handleMessage);
     };
     JsonEditor.prototype.componentWillUnmount = function () {
         if (this.editor) {
             this.editor.destroy();
         }
+        chrome.runtime.onMessage.removeListener(this.handleMessage);
     };
     JsonEditor.prototype.render = function () {
         return react_1.default.createElement("div", { className: "editor-container", ref: this.setEditorRef });

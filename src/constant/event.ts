@@ -1,7 +1,4 @@
 export enum EVENT_TYPE {
-    SEND_PANEL_CONTENT = 'panel-send-to-content',
-    RESPONSE_CONTENT_PANEL = 'content-response-to-panel',
-
-    SEND_CONTENT_INJECT = 'content-send-to-inject',
-    RESPONSE_INJECT_CONTENT = 'inject-response-to-content',
+    SEND_INJECT_CONTENT = 'inject-send-to-content',
+    SEND_CONTENT_PANEL = 'content-send-to-panel',
 }
