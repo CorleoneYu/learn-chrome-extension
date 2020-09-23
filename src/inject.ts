@@ -1,4 +1,4 @@
-import { EVENT_TYPE } from './constant/event';
+import { EVENT_TYPE, DATA_TYPE } from './constant/event';
 
 console.log('inject!!!');
 
@@ -11,8 +11,11 @@ window.getCellData = function(row: number, column: number) {
     const msg = {
         type: EVENT_TYPE.SEND_INJECT_CONTENT,
         payload: {
-            cellData,
-            cellView,
+            type: DATA_TYPE.CELL_INFO,
+            data: {
+                cellData,
+                cellView,
+            },
         },
     };
 

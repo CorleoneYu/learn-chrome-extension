@@ -96,12 +96,19 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EVENT_TYPE = void 0;
+exports.DATA_TYPE = exports.EVENT_TYPE = void 0;
+// 标志 哪个页面 -> 哪个页面
 var EVENT_TYPE;
 (function (EVENT_TYPE) {
     EVENT_TYPE["SEND_INJECT_CONTENT"] = "inject-send-to-content";
     EVENT_TYPE["SEND_CONTENT_PANEL"] = "content-send-to-panel";
 })(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
+// 标志 inject 中发送的数据类型
+var DATA_TYPE;
+(function (DATA_TYPE) {
+    DATA_TYPE["CELL_INFO"] = "cell-info";
+    DATA_TYPE["DATABASE"] = "database";
+})(DATA_TYPE = exports.DATA_TYPE || (exports.DATA_TYPE = {}));
 
 
 /***/ }),
@@ -125,8 +132,11 @@ window.getCellData = function (row, column) {
     var msg = {
         type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
         payload: {
-            cellData: cellData,
-            cellView: cellView,
+            type: event_1.DATA_TYPE.CELL_INFO,
+            data: {
+                cellData: cellData,
+                cellView: cellView,
+            },
         },
     };
     eval(window.postMessage(msg, '*'));
