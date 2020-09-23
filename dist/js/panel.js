@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/search-input/style.less":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/search-input/style.less ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/database-info/style.less":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/database-info/style.less ***!
+  \************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_4_2_2_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".input-box {\n  display: flex;\n  align-items: center;\n}\n.input-box .input-container {\n  margin-right: 10px;\n}\n", "",{"version":3,"sources":["webpack://src/panel/component/search-input/style.less"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,mBAAA;AACJ;AAHA;EAKQ,kBAAA;AACR","sourcesContent":[".input-box {\n    display: flex;\n    align-items: center;\n\n    .input-container {\n        margin-right: 10px;\n    }\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "", "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -29105,23 +29105,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var cell_info_1 = __importDefault(__webpack_require__(/*! ./component/cell-info */ "./src/panel/component/cell-info/index.ts"));
-var ws_list_1 = __importDefault(__webpack_require__(/*! ./component/ws-list */ "./src/panel/component/ws-list/index.ts"));
+// import CellInfo from './component/cell-info';
+// import WsList from './component/ws-list';
+var database_info_1 = __importDefault(__webpack_require__(/*! ./component/database-info */ "./src/panel/component/database-info/index.ts"));
 function Panel() {
     return (react_1.default.createElement("div", { className: "panel-container" },
-        react_1.default.createElement("div", { className: "cell-info-box" },
-            react_1.default.createElement(cell_info_1.default, null)),
-        react_1.default.createElement("div", { className: "ws-list-box" },
-            react_1.default.createElement(ws_list_1.default, null))));
+        react_1.default.createElement("div", { className: "doc-x" },
+            react_1.default.createElement("div", { className: "database-list-box" },
+                react_1.default.createElement(database_info_1.default, null)))));
 }
 exports.default = Panel;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/cell-info/CellInfo.tsx":
+/***/ "./src/panel/component/database-info/index.ts":
 /*!****************************************************!*\
-  !*** ./src/panel/component/cell-info/CellInfo.tsx ***!
+  !*** ./src/panel/component/database-info/index.ts ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var info_1 = __importDefault(__webpack_require__(/*! ./info */ "./src/panel/component/database-info/info.tsx"));
+exports.default = info_1.default;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/database-info/info.tsx":
+/*!****************************************************!*\
+  !*** ./src/panel/component/database-info/info.tsx ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -29153,14 +29172,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
 var json_editor_1 = __importDefault(__webpack_require__(/*! ../json-editor */ "./src/panel/component/json-editor/index.ts"));
-var search_input_1 = __importDefault(__webpack_require__(/*! ../search-input */ "./src/panel/component/search-input/index.ts"));
+var input_1 = __importDefault(__webpack_require__(/*! ./input */ "./src/panel/component/database-info/input.tsx"));
 var event_1 = __webpack_require__(/*! ../../../constant/event */ "./src/constant/event.ts");
-function CellInfo() {
+function DatabaseInfo() {
     var _a = react_1.useState(null), data = _a[0], setData = _a[1];
     var handleMessage = react_1.useCallback(function (message) {
         console.log('cell-info received', message);
         var _a = message.payload, data = _a.data, type = _a.type;
-        if (type === event_1.DATA_TYPE.CELL_INFO) {
+        if (type === event_1.DATA_TYPE.DATABASE) {
             setData(data);
         }
     }, [setData]);
@@ -29171,30 +29190,92 @@ function CellInfo() {
         };
     }, [handleMessage]);
     return (react_1.default.createElement("div", { className: "cell-info" },
-        react_1.default.createElement(search_input_1.default, null),
+        react_1.default.createElement(input_1.default, null),
         react_1.default.createElement(json_editor_1.default, { data: data })));
 }
-exports.default = CellInfo;
+exports.default = DatabaseInfo;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/cell-info/index.ts":
-/*!************************************************!*\
-  !*** ./src/panel/component/cell-info/index.ts ***!
-  \************************************************/
+/***/ "./src/panel/component/database-info/input.tsx":
+/*!*****************************************************!*\
+  !*** ./src/panel/component/database-info/input.tsx ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var CellInfo_1 = __importDefault(__webpack_require__(/*! ./CellInfo */ "./src/panel/component/cell-info/CellInfo.tsx"));
-exports.default = CellInfo_1.default;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
+__webpack_require__(/*! ./style.less */ "./src/panel/component/database-info/style.less");
+var SearchInput = function () {
+    var _a = useInput_1.default(), index = _a[0], IndexInput = _a[1];
+    var searchDatabase = react_1.useCallback(function () {
+        console.log('searchDatabase', index);
+        chrome.devtools.inspectedWindow.eval("window.getDatabase(" + index + ")");
+    }, [index]);
+    return (react_1.default.createElement("div", { className: "input-box" },
+        react_1.default.createElement("div", { className: "input-container row-input-container" },
+            react_1.default.createElement("span", null, "index: "),
+            IndexInput),
+        react_1.default.createElement("button", { className: "search-btn", onClick: searchDatabase }, "\u67E5\u8BE2")));
+};
+exports.default = SearchInput;
 
+
+/***/ }),
+
+/***/ "./src/panel/component/database-info/style.less":
+/*!******************************************************!*\
+  !*** ./src/panel/component/database-info/style.less ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!../../../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./style.less */ "./node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/database-info/style.less");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
 
 /***/ }),
 
@@ -29302,170 +29383,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var JsonEditor_1 = __importDefault(__webpack_require__(/*! ./JsonEditor */ "./src/panel/component/json-editor/JsonEditor.tsx"));
 exports.default = JsonEditor_1.default;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/search-input/SearchInput.tsx":
-/*!**********************************************************!*\
-  !*** ./src/panel/component/search-input/SearchInput.tsx ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
-__webpack_require__(/*! ./style.less */ "./src/panel/component/search-input/style.less");
-var SearchInput = function () {
-    var _a = useInput_1.default(), row = _a[0], RowInput = _a[1];
-    var _b = useInput_1.default(), column = _b[0], ColumnInput = _b[1];
-    var searchData = react_1.useCallback(function () {
-        console.log('searchData', row, column);
-        chrome.devtools.inspectedWindow.eval("window.getCellData(" + row + ", " + column + ")");
-    }, [row, column]);
-    return (react_1.default.createElement("div", { className: "input-box" },
-        react_1.default.createElement("div", { className: "input-container row-input-container" },
-            react_1.default.createElement("span", null, "\u884C: "),
-            RowInput),
-        react_1.default.createElement("div", { className: "input-container column-input-container" },
-            react_1.default.createElement("span", null, "\u5217: "),
-            ColumnInput),
-        react_1.default.createElement("button", { className: "search-btn", onClick: searchData }, "\u67E5\u8BE2")));
-};
-exports.default = SearchInput;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/search-input/index.ts":
-/*!***************************************************!*\
-  !*** ./src/panel/component/search-input/index.ts ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var SearchInput_1 = __importDefault(__webpack_require__(/*! ./SearchInput */ "./src/panel/component/search-input/SearchInput.tsx"));
-exports.default = SearchInput_1.default;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/search-input/style.less":
-/*!*****************************************************!*\
-  !*** ./src/panel/component/search-input/style.less ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../../../node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!../../../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./style.less */ "./node_modules/_css-loader@4.2.2@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/search-input/style.less");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
-
-/***/ }),
-
-/***/ "./src/panel/component/ws-list/WsList.tsx":
-/*!************************************************!*\
-  !*** ./src/panel/component/ws-list/WsList.tsx ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var WsList = function () {
-    // const [requestList, setRequestList] = useState<any>([]);
-    // const handleRequest = useCallback((request) => {
-    //     if (request._resourceType === "websocket") {
-    //         console.log('websocket', request);
-    //         setRequestList((requestList) => [
-    //             ...requestList,
-    //             request,
-    //         ]);
-    //     }
-    // }, [setRequestList]);
-    // useEffect(() => {
-    //     chrome.devtools.network.onRequestFinished.addListener(handleRequest);
-    //     return () => {
-    //         chrome.devtools.network.onRequestFinished.removeListener(handleRequest);
-    //     }
-    // }, [handleRequest]);
-    // const handleClick = useCallback(() => {
-    //     console.log('click', requestList);
-    // }, [requestList]);
-    return react_1.default.createElement("div", { className: "ws-list" }, "xxx");
-};
-exports.default = WsList;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/ws-list/index.ts":
-/*!**********************************************!*\
-  !*** ./src/panel/component/ws-list/index.ts ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var WsList_1 = __importDefault(__webpack_require__(/*! ./WsList */ "./src/panel/component/ws-list/WsList.tsx"));
-exports.default = WsList_1.default;
 
 
 /***/ }),

@@ -125,6 +125,11 @@ var DATA_TYPE;
 Object.defineProperty(exports, "__esModule", { value: true });
 var event_1 = __webpack_require__(/*! ./constant/event */ "./src/constant/event.ts");
 console.log('inject!!!');
+/**
+ * 获取 sheet 上 activeSheet 特定某个单元格数据
+ * @param row 行
+ * @param column 列
+ */
 window.getCellData = function (row, column) {
     var cellData = window.SpreadsheetApp.spreadsheet.activeSheet.data.rowData[row].values[column];
     var cellView = window.SpreadsheetApp.view.canvas.tableView._cellViews[row][column];
@@ -137,6 +142,26 @@ window.getCellData = function (row, column) {
                 cellData: cellData,
                 cellView: cellView,
             },
+        },
+    };
+    eval(window.postMessage(msg, '*'));
+};
+window.getDatabase = function (index) {
+    var anchorId = window.pad.editor.onDocument().getInlinePlugins().item(index).getAttributes().anchorId;
+    var _a = anchorId.split('_'), sheetId = _a[0], viewId = _a[1];
+    var sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
+    var viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view.canvas.tableView.cellViews;
+    var viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
+    console.log('getDatabase', anchorId, sheetId, viewId, sheetData, viewData, viewOptions);
+    var msg = {
+        type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
+        payload: {
+            type: event_1.DATA_TYPE.DATABASE,
+            data: {
+                sheetData: sheetData,
+                viewData: viewData,
+                viewOptions: viewOptions,
+            }
         },
     };
     eval(window.postMessage(msg, '*'));
