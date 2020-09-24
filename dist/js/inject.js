@@ -108,6 +108,7 @@ var DATA_TYPE;
 (function (DATA_TYPE) {
     DATA_TYPE["CELL_INFO"] = "cell-info";
     DATA_TYPE["DATABASE"] = "database";
+    DATA_TYPE["UNLOAD"] = "unload";
 })(DATA_TYPE = exports.DATA_TYPE || (exports.DATA_TYPE = {}));
 
 
@@ -158,6 +159,8 @@ window.getDatabase = function (index) {
         payload: {
             type: event_1.DATA_TYPE.DATABASE,
             data: {
+                sheetId: sheetId,
+                viewId: viewId,
                 sheetData: sheetData,
                 viewData: viewData,
                 viewOptions: viewOptions,
@@ -166,6 +169,16 @@ window.getDatabase = function (index) {
     };
     eval(window.postMessage(msg, '*'));
 };
+// 刷新时让 panel 清空 websocket 列表
+window.addListener('unload', function () {
+    var msg = {
+        type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
+        payload: {
+            type: event_1.DATA_TYPE.UNLOAD,
+        }
+    };
+    eval(window.postMessage(msg, '*'));
+});
 
 
 /***/ })

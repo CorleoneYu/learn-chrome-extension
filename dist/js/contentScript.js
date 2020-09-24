@@ -108,6 +108,7 @@ var DATA_TYPE;
 (function (DATA_TYPE) {
     DATA_TYPE["CELL_INFO"] = "cell-info";
     DATA_TYPE["DATABASE"] = "database";
+    DATA_TYPE["UNLOAD"] = "unload";
 })(DATA_TYPE = exports.DATA_TYPE || (exports.DATA_TYPE = {}));
 
 

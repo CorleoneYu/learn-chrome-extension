@@ -1,6 +1,6 @@
 import React from 'react';
 // import CellInfo from './component/cell-info';
-// import WsList from './component/ws-list';
+import WsList from './component/ws-list';
 import DatabaseInfo from './component/database-info';
 
 export default function Panel() {
@@ -11,9 +11,6 @@ export default function Panel() {
                 <div className="cell-info-box">
                     <CellInfo />
                 </div>
-                <div className="ws-list-box">
-                    <WsList />
-                </div>
             </div> */}
             
             {/** 文档x */}
@@ -21,6 +18,9 @@ export default function Panel() {
                 <div className="database-list-box">
                     <DatabaseInfo />
                 </div>
+            </div>
+            <div className="ws-list-box">
+                <WsList />
             </div>
         </div>
     );

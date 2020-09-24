@@ -41,6 +41,8 @@ window.getDatabase = function(index: number) {
         payload: {
             type: DATA_TYPE.DATABASE,
             data: {
+                sheetId,
+                viewId,
                 sheetData,
                 viewData,
                 viewOptions,
@@ -49,3 +51,14 @@ window.getDatabase = function(index: number) {
     };
     eval(window.postMessage(msg, '*'));
 }
+
+// 刷新时让 panel 清空 websocket 列表
+window.addListener('unload', function() {
+    const msg = {
+        type: EVENT_TYPE.SEND_INJECT_CONTENT,
+        payload: {
+            type: DATA_TYPE.UNLOAD,
+        }
+    };
+    eval(window.postMessage(msg, '*'));
+})

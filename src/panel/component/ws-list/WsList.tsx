@@ -1,30 +1,44 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import './style.less';
 
 const WsList = () => {
-    // const [requestList, setRequestList] = useState<any>([]);
-    // const handleRequest = useCallback((request) => {
-    //     if (request._resourceType === "websocket") {
-    //         console.log('websocket', request);
-    //         setRequestList((requestList) => [
-    //             ...requestList,
-    //             request,
-    //         ]);
-    //     }
-    // }, [setRequestList]);
+    const [wsList, setWsList] = useState<any>([]);
 
-    // useEffect(() => {
-    //     chrome.devtools.network.onRequestFinished.addListener(handleRequest);
-    //     return () => {
-    //         chrome.devtools.network.onRequestFinished.removeListener(handleRequest);
-    //     }
-    // }, [handleRequest]);
-
-    // const handleClick = useCallback(() => {
-    //     console.log('click', requestList);
-    // }, [requestList]);
+    const getHar = useCallback(() => {
+        chrome.devtools.network.getHAR(har => {
+            const wsList = [];
+            har.entries.forEach(entry => {
+                // @ts-ignore
+                if (entry._resourceType === 'websocket') {
+                    const ws = {
+                        id: entry.time,
+                        request: entry.request,
+                        // @ts-ignore
+                        webSocketMessages: entry._webSocketMessages,
+                    };
+                    wsList.push(ws);
+                }
+            })
+            console.log('wsList', wsList);
+            setWsList(wsList);
+        })
+    }, [setWsList]);
 
     return <div className="ws-list">
-        xxx
+        <button onClick={getHar}>getHar()</button>
+        {wsList.map(ws => (
+            <div className="ws-item" key={ws.id}>
+                <div className="message-list">
+                    {ws.webSocketMessages.map(message => (
+                        <div className="message-item" key={message.time}>
+                            <div className="message-type">type: {message.type}</div>
+                            <div className="message-data">{message.data}</div>
+                        </div>
+                    ))}
+                </div>
+                
+            </div>
+        ))}
     </div>
 }
 

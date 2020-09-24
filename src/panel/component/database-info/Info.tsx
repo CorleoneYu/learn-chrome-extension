@@ -24,7 +24,7 @@ export default function DatabaseInfo() {
         return () => {
             chrome.runtime.onMessage.removeListener(handleMessage);
         }
-    }, [handleMessage])
+    }, [handleMessage]);
 
     return (
         <div className="cell-info">

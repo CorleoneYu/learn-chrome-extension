@@ -7,5 +7,6 @@ export enum EVENT_TYPE {
 // 标志 inject 中发送的数据类型
 export enum DATA_TYPE {
     CELL_INFO = 'cell-info', // 普通 sheet 用
-    DATABASE = 'database', // doc-x 用
+    DATABASE = 'database', // 获取 database
+    UNLOAD = 'unload', // 提醒 panel 页面刷新（关闭）
 }
