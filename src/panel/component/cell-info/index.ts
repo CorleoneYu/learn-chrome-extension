@@ -1,2 +1,2 @@
-import CellInfo from './CellInfo';
+import CellInfo from './Info';
 export default CellInfo;

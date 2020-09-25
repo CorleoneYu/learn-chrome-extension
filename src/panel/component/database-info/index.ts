@@ -1,2 +1,2 @@
-import DatabaseInfo from './info';
+import DatabaseInfo from './Info';
 export default DatabaseInfo;

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import JsonEditor from '../json-editor';
-import DatabaseInput from './input';
-import { DATA_TYPE } from '../../../constant/event';
+import useInput from '../../hooks/useInput';
+import './style.less';
 
 interface IDatabaseInfoData {
     sheetData: any;
@@ -11,24 +11,27 @@ interface IDatabaseInfoData {
 
 export default function DatabaseInfo() {
     const [data, setData] = useState<IDatabaseInfoData>(null);
-    const handleMessage = useCallback((message) => {
-        console.log('cell-info received', message);
-        const { data, type } = message.payload;
-        if (type === DATA_TYPE.DATABASE) {
-            setData(data);
-        }
-    }, [setData]);
+    const [index, IndexInput] = useInput();
 
-    useEffect(() => {
-        chrome.runtime.onMessage.addListener(handleMessage);
-        return () => {
-            chrome.runtime.onMessage.removeListener(handleMessage);
-        }
-    }, [handleMessage]);
+    const searchDatabase = useCallback(() => {
+        console.log('searchDatabase', index);
+        chrome.devtools.inspectedWindow.eval(`window.getDatabase(${index})`, (result: IDatabaseInfoData) => {
+            console.log('searchDatabase received', result);
+            setData(result);
+        });
+    }, [index, setData]);
 
     return (
         <div className="cell-info">
-            <DatabaseInput />
+            <div className="input-box">
+                <div className="input-container row-input-container">
+                    <span>index: </span>
+                    {IndexInput}
+                </div>
+                <button className="search-btn" onClick={searchDatabase}>
+                    查询
+                </button>
+            </div>
             <JsonEditor data={data} />
         </div>
     );

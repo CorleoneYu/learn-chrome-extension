@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "", "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, ".input-box {\n  display: flex;\n  align-items: center;\n}\n.input-box .input-container {\n  margin-right: 10px;\n}\n", "",{"version":3,"sources":["webpack://src/panel/component/database-info/style.less"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,mBAAA;AACJ;AAHA;EAKQ,kBAAA;AACR","sourcesContent":[".input-box {\n    display: flex;\n    align-items: center;\n\n    .input-container {\n        margin-right: 10px;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -29086,34 +29086,6 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./src/constant/event.ts":
-/*!*******************************!*\
-  !*** ./src/constant/event.ts ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DATA_TYPE = exports.EVENT_TYPE = void 0;
-// 标志 哪个页面 -> 哪个页面
-var EVENT_TYPE;
-(function (EVENT_TYPE) {
-    EVENT_TYPE["SEND_INJECT_CONTENT"] = "inject-send-to-content";
-    EVENT_TYPE["SEND_CONTENT_PANEL"] = "content-send-to-panel";
-})(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
-// 标志 inject 中发送的数据类型
-var DATA_TYPE;
-(function (DATA_TYPE) {
-    DATA_TYPE["CELL_INFO"] = "cell-info";
-    DATA_TYPE["DATABASE"] = "database";
-    DATA_TYPE["UNLOAD"] = "unload";
-})(DATA_TYPE = exports.DATA_TYPE || (exports.DATA_TYPE = {}));
-
-
-/***/ }),
-
 /***/ "./src/panel/Panel.tsx":
 /*!*****************************!*\
   !*** ./src/panel/Panel.tsx ***!
@@ -29128,11 +29100,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-// import CellInfo from './component/cell-info';
+var cell_info_1 = __importDefault(__webpack_require__(/*! ./component/cell-info */ "./src/panel/component/cell-info/index.ts"));
 var ws_list_1 = __importDefault(__webpack_require__(/*! ./component/ws-list */ "./src/panel/component/ws-list/index.ts"));
 var database_info_1 = __importDefault(__webpack_require__(/*! ./component/database-info */ "./src/panel/component/database-info/index.ts"));
 function Panel() {
     return (react_1.default.createElement("div", { className: "panel-container" },
+        react_1.default.createElement("div", { className: "sheet" },
+            react_1.default.createElement("div", { className: "cell-info-box" },
+                react_1.default.createElement(cell_info_1.default, null))),
         react_1.default.createElement("div", { className: "doc-x" },
             react_1.default.createElement("div", { className: "database-list-box" },
                 react_1.default.createElement(database_info_1.default, null))),
@@ -29144,10 +29119,72 @@ exports.default = Panel;
 
 /***/ }),
 
-/***/ "./src/panel/component/database-info/index.ts":
-/*!****************************************************!*\
-  !*** ./src/panel/component/database-info/index.ts ***!
-  \****************************************************/
+/***/ "./src/panel/component/cell-info/Info.tsx":
+/*!************************************************!*\
+  !*** ./src/panel/component/cell-info/Info.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var json_editor_1 = __importDefault(__webpack_require__(/*! ../json-editor */ "./src/panel/component/json-editor/index.ts"));
+var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
+function CellInfo() {
+    var _a = react_1.useState(null), data = _a[0], setData = _a[1];
+    var _b = useInput_1.default(), row = _b[0], RowInput = _b[1];
+    var _c = useInput_1.default(), column = _c[0], ColumnInput = _c[1];
+    var searchData = react_1.useCallback(function () {
+        console.log('searchData', row, column);
+        chrome.devtools.inspectedWindow.eval("window.getCellData(" + row + ", " + column + ")", function (result) {
+            console.log('searchData received', result);
+            setData(result);
+        });
+    }, [row, column, setData]);
+    return (react_1.default.createElement("div", { className: "cell-info" },
+        react_1.default.createElement("div", { className: "input-box" },
+            react_1.default.createElement("div", { className: "input-container row-input-container" },
+                react_1.default.createElement("span", null, "\u884C: "),
+                RowInput),
+            react_1.default.createElement("div", { className: "input-container column-input-container" },
+                react_1.default.createElement("span", null, "\u5217: "),
+                ColumnInput),
+            react_1.default.createElement("button", { className: "search-btn", onClick: searchData }, "\u67E5\u8BE2")),
+        react_1.default.createElement(json_editor_1.default, { data: data })));
+}
+exports.default = CellInfo;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/cell-info/index.ts":
+/*!************************************************!*\
+  !*** ./src/panel/component/cell-info/index.ts ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29157,15 +29194,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var info_1 = __importDefault(__webpack_require__(/*! ./info */ "./src/panel/component/database-info/info.tsx"));
-exports.default = info_1.default;
+var Info_1 = __importDefault(__webpack_require__(/*! ./Info */ "./src/panel/component/cell-info/Info.tsx"));
+exports.default = Info_1.default;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/database-info/info.tsx":
+/***/ "./src/panel/component/database-info/Info.tsx":
 /*!****************************************************!*\
-  !*** ./src/panel/component/database-info/info.tsx ***!
+  !*** ./src/panel/component/database-info/Info.tsx ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -29197,25 +29234,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
 var json_editor_1 = __importDefault(__webpack_require__(/*! ../json-editor */ "./src/panel/component/json-editor/index.ts"));
-var input_1 = __importDefault(__webpack_require__(/*! ./input */ "./src/panel/component/database-info/input.tsx"));
-var event_1 = __webpack_require__(/*! ../../../constant/event */ "./src/constant/event.ts");
+var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
+__webpack_require__(/*! ./style.less */ "./src/panel/component/database-info/style.less");
 function DatabaseInfo() {
     var _a = react_1.useState(null), data = _a[0], setData = _a[1];
-    var handleMessage = react_1.useCallback(function (message) {
-        console.log('cell-info received', message);
-        var _a = message.payload, data = _a.data, type = _a.type;
-        if (type === event_1.DATA_TYPE.DATABASE) {
-            setData(data);
-        }
-    }, [setData]);
-    react_1.useEffect(function () {
-        chrome.runtime.onMessage.addListener(handleMessage);
-        return function () {
-            chrome.runtime.onMessage.removeListener(handleMessage);
-        };
-    }, [handleMessage]);
+    var _b = useInput_1.default(), index = _b[0], IndexInput = _b[1];
+    var searchDatabase = react_1.useCallback(function () {
+        console.log('searchDatabase', index);
+        chrome.devtools.inspectedWindow.eval("window.getDatabase(" + index + ")", function (result) {
+            console.log('searchDatabase received', result);
+            setData(result);
+        });
+    }, [index, setData]);
     return (react_1.default.createElement("div", { className: "cell-info" },
-        react_1.default.createElement(input_1.default, null),
+        react_1.default.createElement("div", { className: "input-box" },
+            react_1.default.createElement("div", { className: "input-container row-input-container" },
+                react_1.default.createElement("span", null, "index: "),
+                IndexInput),
+            react_1.default.createElement("button", { className: "search-btn", onClick: searchDatabase }, "\u67E5\u8BE2")),
         react_1.default.createElement(json_editor_1.default, { data: data })));
 }
 exports.default = DatabaseInfo;
@@ -29223,54 +29259,21 @@ exports.default = DatabaseInfo;
 
 /***/ }),
 
-/***/ "./src/panel/component/database-info/input.tsx":
-/*!*****************************************************!*\
-  !*** ./src/panel/component/database-info/input.tsx ***!
-  \*****************************************************/
+/***/ "./src/panel/component/database-info/index.ts":
+/*!****************************************************!*\
+  !*** ./src/panel/component/database-info/index.ts ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
-__webpack_require__(/*! ./style.less */ "./src/panel/component/database-info/style.less");
-var SearchInput = function () {
-    var _a = useInput_1.default(), index = _a[0], IndexInput = _a[1];
-    var searchDatabase = react_1.useCallback(function () {
-        console.log('searchDatabase', index);
-        chrome.devtools.inspectedWindow.eval("window.getDatabase(" + index + ")");
-    }, [index]);
-    return (react_1.default.createElement("div", { className: "input-box" },
-        react_1.default.createElement("div", { className: "input-container row-input-container" },
-            react_1.default.createElement("span", null, "index: "),
-            IndexInput),
-        react_1.default.createElement("button", { className: "search-btn", onClick: searchDatabase }, "\u67E5\u8BE2")));
-};
-exports.default = SearchInput;
+var Info_1 = __importDefault(__webpack_require__(/*! ./Info */ "./src/panel/component/database-info/Info.tsx"));
+exports.default = Info_1.default;
 
 
 /***/ }),
@@ -29440,11 +29443,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
 __webpack_require__(/*! ./style.less */ "./src/panel/component/ws-list/style.less");
 var WsList = function () {
     var _a = react_1.useState([]), wsList = _a[0], setWsList = _a[1];
+    var _b = useInput_1.default(), input = _b[0], Input = _b[1];
     var getHar = react_1.useCallback(function () {
         chrome.devtools.network.getHAR(function (har) {
             var wsList = [];
@@ -29464,14 +29472,28 @@ var WsList = function () {
             setWsList(wsList);
         });
     }, [setWsList]);
+    var deserializeMutation = react_1.useCallback(function (message) {
+        console.log('message', message.data);
+        var data = message.data;
+        chrome.devtools.inspectedWindow.eval("window.deserializeMutation('" + data + "')", function (result) {
+            console.log('result');
+            console.log(result);
+        });
+    }, []);
+    var testLength = react_1.useCallback(function () {
+        chrome.devtools.inspectedWindow.eval("window.deserializeMutation(" + input + ")");
+    }, [input]);
     return react_1.default.createElement("div", { className: "ws-list" },
+        Input,
+        react_1.default.createElement("button", { onClick: testLength }, "test length"),
         react_1.default.createElement("button", { onClick: getHar }, "getHar()"),
         wsList.map(function (ws) { return (react_1.default.createElement("div", { className: "ws-item", key: ws.id },
             react_1.default.createElement("div", { className: "message-list" }, ws.webSocketMessages.map(function (message) { return (react_1.default.createElement("div", { className: "message-item", key: message.time },
                 react_1.default.createElement("div", { className: "message-type" },
                     "type: ",
                     message.type),
-                react_1.default.createElement("div", { className: "message-data" }, message.data))); })))); }));
+                react_1.default.createElement("div", { className: "message-data" }, message.data),
+                react_1.default.createElement("button", { onClick: function () { return deserializeMutation(message); } }, "\u8FD8\u539F mutation"))); })))); }));
 };
 exports.default = WsList;
 

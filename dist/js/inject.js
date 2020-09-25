@@ -86,34 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/constant/event.ts":
-/*!*******************************!*\
-  !*** ./src/constant/event.ts ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DATA_TYPE = exports.EVENT_TYPE = void 0;
-// 标志 哪个页面 -> 哪个页面
-var EVENT_TYPE;
-(function (EVENT_TYPE) {
-    EVENT_TYPE["SEND_INJECT_CONTENT"] = "inject-send-to-content";
-    EVENT_TYPE["SEND_CONTENT_PANEL"] = "content-send-to-panel";
-})(EVENT_TYPE = exports.EVENT_TYPE || (exports.EVENT_TYPE = {}));
-// 标志 inject 中发送的数据类型
-var DATA_TYPE;
-(function (DATA_TYPE) {
-    DATA_TYPE["CELL_INFO"] = "cell-info";
-    DATA_TYPE["DATABASE"] = "database";
-    DATA_TYPE["UNLOAD"] = "unload";
-})(DATA_TYPE = exports.DATA_TYPE || (exports.DATA_TYPE = {}));
-
-
-/***/ }),
-
 /***/ "./src/inject.ts":
 /*!***********************!*\
   !*** ./src/inject.ts ***!
@@ -124,7 +96,6 @@ var DATA_TYPE;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var event_1 = __webpack_require__(/*! ./constant/event */ "./src/constant/event.ts");
 console.log('inject!!!');
 /**
  * 获取 sheet 上 activeSheet 特定某个单元格数据
@@ -136,49 +107,32 @@ window.getCellData = function (row, column) {
     var cellView = window.SpreadsheetApp.view.canvas.tableView._cellViews[row][column];
     console.log('getCellData', row, column, cellData, cellView);
     var msg = {
-        type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
-        payload: {
-            type: event_1.DATA_TYPE.CELL_INFO,
-            data: {
-                cellData: cellData,
-                cellView: cellView,
-            },
-        },
+        cellData: cellData,
+        cellView: cellView,
     };
-    eval(window.postMessage(msg, '*'));
+    return msg;
 };
 window.getDatabase = function (index) {
     var anchorId = window.pad.editor.onDocument().getInlinePlugins().item(index).getAttributes().anchorId;
     var _a = anchorId.split('_'), sheetId = _a[0], viewId = _a[1];
     var sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
-    var viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view.canvas.tableView.cellViews;
+    var viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view
+        .canvas.tableView.cellViews;
     var viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
     console.log('getDatabase', anchorId, sheetId, viewId, sheetData, viewData, viewOptions);
     var msg = {
-        type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
-        payload: {
-            type: event_1.DATA_TYPE.DATABASE,
-            data: {
-                sheetId: sheetId,
-                viewId: viewId,
-                sheetData: sheetData,
-                viewData: viewData,
-                viewOptions: viewOptions,
-            }
-        },
+        sheetId: sheetId,
+        viewId: viewId,
+        sheetData: sheetData,
+        viewData: viewData,
+        viewOptions: viewOptions,
     };
-    eval(window.postMessage(msg, '*'));
+    return msg;
 };
-// 刷新时让 panel 清空 websocket 列表
-window.addListener('unload', function () {
-    var msg = {
-        type: event_1.EVENT_TYPE.SEND_INJECT_CONTENT,
-        payload: {
-            type: event_1.DATA_TYPE.UNLOAD,
-        }
-    };
-    eval(window.postMessage(msg, '*'));
-});
+window.deserializeMutation = function (data) {
+    console.log('deserializeMutation', data);
+    return window.SpreadsheetApp.tools.deserializeMutation.toString();
+};
 
 
 /***/ })
