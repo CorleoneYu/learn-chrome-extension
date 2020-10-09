@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import JsonEditor from '../json-editor';
+import JsonEditor from '../../base/json-editor';
 import useInput from '../../hooks/useInput';
 
 interface ICellInfoData {

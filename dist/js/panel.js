@@ -108,28 +108,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".input-box {\n  display: flex;\n  align
 
 /***/ }),
 
-/***/ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/ws-list/style.less":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/ws-list/style.less ***!
-  \******************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js */ "./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".ws-list .ws-item {\n  margin-top: 10px;\n  padding: 10px;\n  border: 1px solid black;\n  word-break: break-all;\n}\n", "",{"version":3,"sources":["webpack://src/panel/component/ws-list/style.less"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,aAAA;EACA,uBAAA;EACA,qBAAA;AACJ","sourcesContent":[".ws-list .ws-item {\n    margin-top: 10px;\n    padding: 10px;\n    border: 1px solid black;\n    word-break: break-all;\n\n    // .message-list {\n    //     .message-item {\n            \n    //     }\n    // }\n}\n"],"sourceRoot":""}]);
-// Exports
-/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
 /***/ "./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js ***!
@@ -29100,217 +29078,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var cell_info_1 = __importDefault(__webpack_require__(/*! ./component/cell-info */ "./src/panel/component/cell-info/index.ts"));
-var ws_list_1 = __importDefault(__webpack_require__(/*! ./component/ws-list */ "./src/panel/component/ws-list/index.ts"));
 var database_info_1 = __importDefault(__webpack_require__(/*! ./component/database-info */ "./src/panel/component/database-info/index.ts"));
 function Panel() {
     return (react_1.default.createElement("div", { className: "panel-container" },
-        react_1.default.createElement("div", { className: "sheet" },
-            react_1.default.createElement("div", { className: "cell-info-box" },
-                react_1.default.createElement(cell_info_1.default, null))),
         react_1.default.createElement("div", { className: "doc-x" },
             react_1.default.createElement("div", { className: "database-list-box" },
-                react_1.default.createElement(database_info_1.default, null))),
-        react_1.default.createElement("div", { className: "ws-list-box" },
-            react_1.default.createElement(ws_list_1.default, null))));
+                react_1.default.createElement(database_info_1.default, null)))));
 }
 exports.default = Panel;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/cell-info/Info.tsx":
-/*!************************************************!*\
-  !*** ./src/panel/component/cell-info/Info.tsx ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var json_editor_1 = __importDefault(__webpack_require__(/*! ../json-editor */ "./src/panel/component/json-editor/index.ts"));
-var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
-function CellInfo() {
-    var _a = react_1.useState(null), data = _a[0], setData = _a[1];
-    var _b = useInput_1.default(), row = _b[0], RowInput = _b[1];
-    var _c = useInput_1.default(), column = _c[0], ColumnInput = _c[1];
-    var searchData = react_1.useCallback(function () {
-        console.log('searchData', row, column);
-        chrome.devtools.inspectedWindow.eval("window.getCellData(" + row + ", " + column + ")", function (result) {
-            console.log('searchData received', result);
-            setData(result);
-        });
-    }, [row, column, setData]);
-    return (react_1.default.createElement("div", { className: "cell-info" },
-        react_1.default.createElement("div", { className: "input-box" },
-            react_1.default.createElement("div", { className: "input-container row-input-container" },
-                react_1.default.createElement("span", null, "\u884C: "),
-                RowInput),
-            react_1.default.createElement("div", { className: "input-container column-input-container" },
-                react_1.default.createElement("span", null, "\u5217: "),
-                ColumnInput),
-            react_1.default.createElement("button", { className: "search-btn", onClick: searchData }, "\u67E5\u8BE2")),
-        react_1.default.createElement(json_editor_1.default, { data: data })));
-}
-exports.default = CellInfo;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/cell-info/index.ts":
-/*!************************************************!*\
-  !*** ./src/panel/component/cell-info/index.ts ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var Info_1 = __importDefault(__webpack_require__(/*! ./Info */ "./src/panel/component/cell-info/Info.tsx"));
-exports.default = Info_1.default;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/database-info/Info.tsx":
-/*!****************************************************!*\
-  !*** ./src/panel/component/database-info/Info.tsx ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
-var json_editor_1 = __importDefault(__webpack_require__(/*! ../json-editor */ "./src/panel/component/json-editor/index.ts"));
-var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
-__webpack_require__(/*! ./style.less */ "./src/panel/component/database-info/style.less");
-function DatabaseInfo() {
-    var _a = react_1.useState(null), data = _a[0], setData = _a[1];
-    var _b = useInput_1.default(), index = _b[0], IndexInput = _b[1];
-    var searchDatabase = react_1.useCallback(function () {
-        console.log('searchDatabase', index);
-        chrome.devtools.inspectedWindow.eval("window.getDatabase(" + index + ")", function (result) {
-            console.log('searchDatabase received', result);
-            setData(result);
-        });
-    }, [index, setData]);
-    return (react_1.default.createElement("div", { className: "cell-info" },
-        react_1.default.createElement("div", { className: "input-box" },
-            react_1.default.createElement("div", { className: "input-container row-input-container" },
-                react_1.default.createElement("span", null, "index: "),
-                IndexInput),
-            react_1.default.createElement("button", { className: "search-btn", onClick: searchDatabase }, "\u67E5\u8BE2")),
-        react_1.default.createElement(json_editor_1.default, { data: data })));
-}
-exports.default = DatabaseInfo;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/database-info/index.ts":
-/*!****************************************************!*\
-  !*** ./src/panel/component/database-info/index.ts ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var Info_1 = __importDefault(__webpack_require__(/*! ./Info */ "./src/panel/component/database-info/Info.tsx"));
-exports.default = Info_1.default;
-
-
-/***/ }),
-
-/***/ "./src/panel/component/database-info/style.less":
-/*!******************************************************!*\
-  !*** ./src/panel/component/database-info/style.less ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../../../node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!../../../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./style.less */ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/database-info/style.less");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
-
-/***/ }),
-
-/***/ "./src/panel/component/json-editor/JsonEditor.tsx":
-/*!********************************************************!*\
-  !*** ./src/panel/component/json-editor/JsonEditor.tsx ***!
-  \********************************************************/
+/***/ "./src/panel/base/json-editor/JsonEditor.tsx":
+/*!***************************************************!*\
+  !*** ./src/panel/base/json-editor/JsonEditor.tsx ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29396,10 +29179,10 @@ exports.default = JsonEditor;
 
 /***/ }),
 
-/***/ "./src/panel/component/json-editor/index.ts":
-/*!**************************************************!*\
-  !*** ./src/panel/component/json-editor/index.ts ***!
-  \**************************************************/
+/***/ "./src/panel/base/json-editor/index.ts":
+/*!*********************************************!*\
+  !*** ./src/panel/base/json-editor/index.ts ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29409,16 +29192,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var JsonEditor_1 = __importDefault(__webpack_require__(/*! ./JsonEditor */ "./src/panel/component/json-editor/JsonEditor.tsx"));
+var JsonEditor_1 = __importDefault(__webpack_require__(/*! ./JsonEditor */ "./src/panel/base/json-editor/JsonEditor.tsx"));
 exports.default = JsonEditor_1.default;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/ws-list/WsList.tsx":
-/*!************************************************!*\
-  !*** ./src/panel/component/ws-list/WsList.tsx ***!
-  \************************************************/
+/***/ "./src/panel/component/database-info/Info.tsx":
+/*!****************************************************!*\
+  !*** ./src/panel/component/database-info/Info.tsx ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29448,62 +29231,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var json_editor_1 = __importDefault(__webpack_require__(/*! ../../base/json-editor */ "./src/panel/base/json-editor/index.ts"));
 var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
-__webpack_require__(/*! ./style.less */ "./src/panel/component/ws-list/style.less");
-var WsList = function () {
-    var _a = react_1.useState([]), wsList = _a[0], setWsList = _a[1];
-    var _b = useInput_1.default(), input = _b[0], Input = _b[1];
-    var getHar = react_1.useCallback(function () {
-        chrome.devtools.network.getHAR(function (har) {
-            var wsList = [];
-            har.entries.forEach(function (entry) {
-                // @ts-ignore
-                if (entry._resourceType === 'websocket') {
-                    var ws = {
-                        id: entry.time,
-                        request: entry.request,
-                        // @ts-ignore
-                        webSocketMessages: entry._webSocketMessages,
-                    };
-                    wsList.push(ws);
-                }
-            });
-            console.log('wsList', wsList);
-            setWsList(wsList);
+__webpack_require__(/*! ./style.less */ "./src/panel/component/database-info/style.less");
+function DatabaseInfo() {
+    var _a = react_1.useState(null), data = _a[0], setData = _a[1];
+    var _b = useInput_1.default(), index = _b[0], IndexInput = _b[1];
+    var searchDatabaseByIndex = react_1.useCallback(function () {
+        console.log('searchDatabaseByIndex', index);
+        chrome.devtools.inspectedWindow.eval("window.getDatabaseByIndex(" + index + ")", function (result) {
+            console.log('searchDatabase received', result);
+            setData(result);
         });
-    }, [setWsList]);
-    var deserializeMutation = react_1.useCallback(function (message) {
-        console.log('message', message.data);
-        var data = message.data;
-        chrome.devtools.inspectedWindow.eval("window.deserializeMutation('" + data + "')", function (result) {
-            console.log('result');
-            console.log(result);
+    }, [index, setData]);
+    var searchActiveDatabase = react_1.useCallback(function () {
+        console.log('searchActiveDatabase');
+        chrome.devtools.inspectedWindow.eval("window.getActiveDatabase()", function (result) {
+            console.log('searchDatabase received', result);
+            setData(result);
         });
     }, []);
-    var testLength = react_1.useCallback(function () {
-        chrome.devtools.inspectedWindow.eval("window.deserializeMutation(" + input + ")");
-    }, [input]);
-    return react_1.default.createElement("div", { className: "ws-list" },
-        Input,
-        react_1.default.createElement("button", { onClick: testLength }, "test length"),
-        react_1.default.createElement("button", { onClick: getHar }, "getHar()"),
-        wsList.map(function (ws) { return (react_1.default.createElement("div", { className: "ws-item", key: ws.id },
-            react_1.default.createElement("div", { className: "message-list" }, ws.webSocketMessages.map(function (message) { return (react_1.default.createElement("div", { className: "message-item", key: message.time },
-                react_1.default.createElement("div", { className: "message-type" },
-                    "type: ",
-                    message.type),
-                react_1.default.createElement("div", { className: "message-data" }, message.data),
-                react_1.default.createElement("button", { onClick: function () { return deserializeMutation(message); } }, "\u8FD8\u539F mutation"))); })))); }));
-};
-exports.default = WsList;
+    return (react_1.default.createElement("div", { className: "cell-info" },
+        react_1.default.createElement("div", { className: "input-box" },
+            react_1.default.createElement("div", { className: "input-container row-input-container" },
+                react_1.default.createElement("span", null, "index: "),
+                IndexInput),
+            react_1.default.createElement("button", { className: "search-btn", onClick: searchDatabaseByIndex }, "\u67E5\u8BE2"),
+            react_1.default.createElement("button", { className: "search-active-btn", onClick: searchActiveDatabase }, "\u67E5\u8BE2 active \u89C6\u56FE")),
+        react_1.default.createElement(json_editor_1.default, { data: data })));
+}
+exports.default = DatabaseInfo;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/ws-list/index.ts":
-/*!**********************************************!*\
-  !*** ./src/panel/component/ws-list/index.ts ***!
-  \**********************************************/
+/***/ "./src/panel/component/database-info/index.ts":
+/*!****************************************************!*\
+  !*** ./src/panel/component/database-info/index.ts ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29513,21 +29278,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var WsList_1 = __importDefault(__webpack_require__(/*! ./WsList */ "./src/panel/component/ws-list/WsList.tsx"));
-exports.default = WsList_1.default;
+var Info_1 = __importDefault(__webpack_require__(/*! ./Info */ "./src/panel/component/database-info/Info.tsx"));
+exports.default = Info_1.default;
 
 
 /***/ }),
 
-/***/ "./src/panel/component/ws-list/style.less":
-/*!************************************************!*\
-  !*** ./src/panel/component/ws-list/style.less ***!
-  \************************************************/
+/***/ "./src/panel/component/database-info/style.less":
+/*!******************************************************!*\
+  !*** ./src/panel/component/database-info/style.less ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(/*! ../../../../node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!../../../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./style.less */ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/ws-list/style.less");
+            var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!../../../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./style.less */ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/database-info/style.less");
 
             content = content.__esModule ? content.default : content;
 
@@ -29585,11 +29350,7 @@ var useInput = function () {
         setValue(value);
     }, []);
     var InputCom = react_1.default.createElement("input", { value: value, onChange: handleChange });
-    return [
-        value,
-        InputCom,
-        setValue,
-    ];
+    return [value, InputCom, setValue];
 };
 exports.default = useInput;
 

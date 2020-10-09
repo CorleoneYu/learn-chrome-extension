@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import JsonEditor from '../json-editor';
+import JsonEditor from '../../base/json-editor';
 import useInput from '../../hooks/useInput';
 import './style.less';
 
@@ -13,13 +13,21 @@ export default function DatabaseInfo() {
     const [data, setData] = useState<IDatabaseInfoData>(null);
     const [index, IndexInput] = useInput();
 
-    const searchDatabase = useCallback(() => {
-        console.log('searchDatabase', index);
-        chrome.devtools.inspectedWindow.eval(`window.getDatabase(${index})`, (result: IDatabaseInfoData) => {
+    const searchDatabaseByIndex = useCallback(() => {
+        console.log('searchDatabaseByIndex', index);
+        chrome.devtools.inspectedWindow.eval(`window.getDatabaseByIndex(${index})`, (result: IDatabaseInfoData) => {
             console.log('searchDatabase received', result);
             setData(result);
         });
     }, [index, setData]);
+
+    const searchActiveDatabase = useCallback(() => {
+        console.log('searchActiveDatabase');
+        chrome.devtools.inspectedWindow.eval(`window.getActiveDatabase()`, (result: IDatabaseInfoData) => {
+            console.log('searchDatabase received', result);
+            setData(result);
+        });
+    }, []);
 
     return (
         <div className="cell-info">
@@ -28,8 +36,11 @@ export default function DatabaseInfo() {
                     <span>index: </span>
                     {IndexInput}
                 </div>
-                <button className="search-btn" onClick={searchDatabase}>
+                <button className="search-btn" onClick={searchDatabaseByIndex}>
                     查询
+                </button>
+                <button className="search-active-btn" onClick={searchActiveDatabase}>
+                    查询 active 视图
                 </button>
             </div>
             <JsonEditor data={data} />

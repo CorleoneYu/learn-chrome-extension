@@ -112,14 +112,12 @@ window.getCellData = function (row, column) {
     };
     return msg;
 };
-window.getDatabase = function (index) {
-    var anchorId = window.pad.editor.onDocument().getInlinePlugins().item(index).getAttributes().anchorId;
-    var _a = anchorId.split('_'), sheetId = _a[0], viewId = _a[1];
+function getDatabase(sheetId, viewId) {
     var sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
     var viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view
         .canvas.tableView.cellViews;
     var viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
-    console.log('getDatabase', anchorId, sheetId, viewId, sheetData, viewData, viewOptions);
+    console.log('getDatabase', sheetId, viewId, sheetData, viewData, viewOptions);
     var msg = {
         sheetId: sheetId,
         viewId: viewId,
@@ -128,6 +126,17 @@ window.getDatabase = function (index) {
         viewOptions: viewOptions,
     };
     return msg;
+}
+;
+window.getDatabaseByIndex = function (index) {
+    var anchorId = window.pad.editor.onDocument().getInlinePlugins().item(index).getAttributes().anchorId;
+    var _a = anchorId.split('_'), sheetId = _a[0], viewId = _a[1];
+    return getDatabase(sheetId, viewId);
+};
+window.getActiveDatabase = function () {
+    var sheetId = window.SpreadsheetApp.spreadsheet.getActiveSheetId();
+    var viewId = window.SpreadsheetApp.spreadsheet.viewManager.activeViewId;
+    return getDatabase(sheetId, viewId);
 };
 window.deserializeMutation = function (data) {
     console.log('deserializeMutation', data);

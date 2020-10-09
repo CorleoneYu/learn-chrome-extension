@@ -7,11 +7,11 @@ export default function Panel() {
     return (
         <div className="panel-container">
             {/* sheet 使用 */}
-            <div className="sheet">
+            {/* <div className="sheet">
                 <div className="cell-info-box">
                     <CellInfo />
                 </div>
-            </div>
+            </div> */}
             
             {/** 文档x */}
             <div className="doc-x">
@@ -19,9 +19,9 @@ export default function Panel() {
                     <DatabaseInfo />
                 </div>
             </div>
-            <div className="ws-list-box">
+            {/* <div className="ws-list-box">
                 <WsList />
-            </div>
+            </div> */}
         </div>
     );
 }

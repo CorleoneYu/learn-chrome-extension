@@ -21,15 +21,13 @@ window.getCellData = function (row: number, column: number) {
     return msg;
 };
 
-window.getDatabase = function (index: number) {
-    const anchorId = window.pad.editor.onDocument().getInlinePlugins().item(index).getAttributes().anchorId as string;
-    const [sheetId, viewId] = anchorId.split('_');
+function getDatabase(sheetId: string, viewId: string) {
     const sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
     const viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view
         .canvas.tableView.cellViews;
     const viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
 
-    console.log('getDatabase', anchorId, sheetId, viewId, sheetData, viewData, viewOptions);
+    console.log('getDatabase', sheetId, viewId, sheetData, viewData, viewOptions);
 
     const msg = {
         sheetId,
@@ -40,6 +38,18 @@ window.getDatabase = function (index: number) {
     };
     return msg;
 };
+
+window.getDatabaseByIndex = function(index: number) {
+    const anchorId = window.pad.editor.onDocument().getInlinePlugins().item(index).getAttributes().anchorId as string;
+    const [sheetId, viewId] = anchorId.split('_');
+    return getDatabase(sheetId, viewId);
+}
+
+window.getActiveDatabase = function() {
+    const sheetId = window.SpreadsheetApp.spreadsheet.getActiveSheetId();
+    const viewId = window.SpreadsheetApp.spreadsheet.viewManager.activeViewId;
+    return getDatabase(sheetId, viewId);
+}
 
 window.deserializeMutation = function (data: string) {
     console.log('deserializeMutation', data);
