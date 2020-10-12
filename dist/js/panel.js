@@ -108,6 +108,50 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".input-box {\n  display: flex;\n  align
 
 /***/ }),
 
+/***/ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/ws-list/style.less":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/ws-list/style.less ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js */ "./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".ws-list .form {\n  margin-top: 10px;\n  display: flex;\n  align-items: center;\n}\n.ws-list .form .form-item {\n  margin-right: 20px;\n}\n.ws-list .ws-item {\n  margin-top: 10px;\n  padding: 10px;\n  border: 1px solid black;\n  word-break: break-all;\n}\n", "",{"version":3,"sources":["webpack://src/panel/component/ws-list/style.less"],"names":[],"mappings":"AAAA;EAEQ,gBAAA;EACA,aAAA;EACA,mBAAA;AAAR;AAJA;EAMY,kBAAA;AACZ;AAPA;EAWQ,gBAAA;EACA,aAAA;EACA,uBAAA;EACA,qBAAA;AADR","sourcesContent":[".ws-list {\n    .form {\n        margin-top: 10px;\n        display: flex;\n        align-items: center;\n        .form-item {\n            margin-right: 20px;\n        }\n    }\n\n    .ws-item {\n        margin-top: 10px;\n        padding: 10px;\n        border: 1px solid black;\n        word-break: break-all;\n    }\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/style/base.less":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/style/base.less ***!
+  \***********************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js */ "./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fdfdfd;\n}\n", "",{"version":3,"sources":["webpack://src/style/base.less"],"names":[],"mappings":"AAAA;EACI,mBAAA;AACJ","sourcesContent":["body {\n    background: #fdfdfd;\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/_css-loader@4.3.0@css-loader/dist/runtime/api.js ***!
@@ -29078,12 +29122,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var ws_list_1 = __importDefault(__webpack_require__(/*! ./component/ws-list */ "./src/panel/component/ws-list/index.ts"));
 var database_info_1 = __importDefault(__webpack_require__(/*! ./component/database-info */ "./src/panel/component/database-info/index.ts"));
 function Panel() {
     return (react_1.default.createElement("div", { className: "panel-container" },
         react_1.default.createElement("div", { className: "doc-x" },
             react_1.default.createElement("div", { className: "database-list-box" },
-                react_1.default.createElement(database_info_1.default, null)))));
+                react_1.default.createElement(database_info_1.default, null))),
+        react_1.default.createElement("div", { className: "ws-list-box" },
+            react_1.default.createElement(ws_list_1.default, null))));
 }
 exports.default = Panel;
 
@@ -29194,6 +29241,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var JsonEditor_1 = __importDefault(__webpack_require__(/*! ./JsonEditor */ "./src/panel/base/json-editor/JsonEditor.tsx"));
 exports.default = JsonEditor_1.default;
+
+
+/***/ }),
+
+/***/ "./src/panel/base/switch/Switch.tsx":
+/*!******************************************!*\
+  !*** ./src/panel/base/switch/Switch.tsx ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var Switch = function (props) {
+    var title = props.title, value = props.value;
+    return react_1.default.createElement("button", { className: "switch-btn" },
+        title,
+        ": ",
+        value ? '是' : '否');
+};
+exports.default = Switch;
+
+
+/***/ }),
+
+/***/ "./src/panel/base/switch/index.ts":
+/*!****************************************!*\
+  !*** ./src/panel/base/switch/index.ts ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Switch_1 = __importDefault(__webpack_require__(/*! ./Switch */ "./src/panel/base/switch/Switch.tsx"));
+exports.default = Switch_1.default;
 
 
 /***/ }),
@@ -29313,6 +29405,266 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./src/panel/component/ws-list/MessageList.tsx":
+/*!*****************************************************!*\
+  !*** ./src/panel/component/ws-list/MessageList.tsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var utils_1 = __webpack_require__(/*! ./utils */ "./src/panel/component/ws-list/utils.ts");
+/**
+ * 是否可以进行反序列化
+ * 1. type 为 send
+ * 2. data 为 user change
+ * @param message
+ */
+var canDeserialize = function (message) {
+    if (message.type === 'send' && utils_1.isUserChanges(message.data)) {
+        return true;
+    }
+    return false;
+};
+var MessageList = function (props) {
+    var messageList = props.messageList, showHeartBeat = props.showHeartBeat, onlyUserChanges = props.onlyUserChanges, onMutationChange = props.onMutationChange;
+    var deserializeMutation = react_1.useCallback(function (message) {
+        var data = message.data;
+        chrome.devtools.inspectedWindow.eval("window.deserializeMutation('" + data + "')", function (mutationArray) {
+            onMutationChange(mutationArray);
+        });
+    }, [onMutationChange]);
+    /**
+     * 根据条件是否展示该条 message
+     */
+    var showMessage = react_1.useCallback(function (message) {
+        // user change 条件
+        if (onlyUserChanges && !utils_1.isUserChanges(message.data)) {
+            return false;
+        }
+        // 心跳包条件
+        if (!showHeartBeat && utils_1.isHeartBeat(message.data)) {
+            return false;
+        }
+        return true;
+    }, [showHeartBeat, onlyUserChanges]);
+    var renderData = react_1.useCallback(function (message) {
+        var show = showMessage(message);
+        return show ? (react_1.default.createElement("div", { className: "message-item", key: message.time },
+            react_1.default.createElement("div", { className: "message-type" },
+                "type: ",
+                message.type),
+            react_1.default.createElement("div", { className: "message-data" }, message.data),
+            canDeserialize(message) && react_1.default.createElement("button", { onClick: function () { return deserializeMutation(message); } }, "\u8FD8\u539F mutation"))) : null;
+    }, [showMessage, deserializeMutation]);
+    return react_1.default.createElement("div", { className: "message-list" }, messageList.map(function (message) { return renderData(message); }));
+};
+exports.default = MessageList;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/ws-list/WsList.tsx":
+/*!************************************************!*\
+  !*** ./src/panel/component/ws-list/WsList.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var MessageList_1 = __importDefault(__webpack_require__(/*! ./MessageList */ "./src/panel/component/ws-list/MessageList.tsx"));
+var useSwitch_1 = __importDefault(__webpack_require__(/*! ../../hooks/useSwitch */ "./src/panel/hooks/useSwitch.tsx"));
+var json_editor_1 = __importDefault(__webpack_require__(/*! ../../base/json-editor */ "./src/panel/base/json-editor/index.ts"));
+__webpack_require__(/*! ./style.less */ "./src/panel/component/ws-list/style.less");
+var WsList = function () {
+    var _a = react_1.useState([]), wsList = _a[0], setWsList = _a[1];
+    var _b = useSwitch_1.default('展示心跳包', false), HeartBeatSwitch = _b.SwitchCom, showHeartBeat = _b.value;
+    var _c = useSwitch_1.default('仅展示 User Changes', true), OnlyUserChangesSwitch = _c.SwitchCom, onlyUserChanges = _c.value;
+    var _d = react_1.useState([]), data = _d[0], setData = _d[1];
+    var getHar = react_1.useCallback(function () {
+        chrome.devtools.network.getHAR(function (har) {
+            var wsList = [];
+            har.entries.forEach(function (entry) {
+                // @ts-ignore
+                if (entry._resourceType === 'websocket') {
+                    var ws = {
+                        id: entry.time,
+                        request: entry.request,
+                        // @ts-ignore
+                        webSocketMessages: entry._webSocketMessages,
+                    };
+                    wsList.push(ws);
+                }
+            });
+            console.log('wsList', wsList);
+            setWsList(wsList);
+        });
+    }, [setWsList]);
+    return (react_1.default.createElement("div", { className: "ws-list" },
+        react_1.default.createElement(json_editor_1.default, { data: data }),
+        react_1.default.createElement("div", { className: "form" },
+            react_1.default.createElement("div", { className: "form-item" },
+                react_1.default.createElement("button", { onClick: getHar }, "getHar()")),
+            react_1.default.createElement("div", { className: "form-item" }, OnlyUserChangesSwitch),
+            !onlyUserChanges && react_1.default.createElement("div", { className: "form-item" }, HeartBeatSwitch)),
+        wsList.map(function (ws) { return (react_1.default.createElement("div", { className: "ws-item", key: ws.id },
+            react_1.default.createElement(MessageList_1.default, { messageList: ws.webSocketMessages, showHeartBeat: showHeartBeat, onlyUserChanges: onlyUserChanges, onMutationChange: setData }))); })));
+};
+exports.default = WsList;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/ws-list/index.ts":
+/*!**********************************************!*\
+  !*** ./src/panel/component/ws-list/index.ts ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var WsList_1 = __importDefault(__webpack_require__(/*! ./WsList */ "./src/panel/component/ws-list/WsList.tsx"));
+exports.default = WsList_1.default;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/ws-list/style.less":
+/*!************************************************!*\
+  !*** ./src/panel/component/ws-list/style.less ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!../../../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./style.less */ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/panel/component/ws-list/style.less");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ "./src/panel/component/ws-list/utils.ts":
+/*!**********************************************!*\
+  !*** ./src/panel/component/ws-list/utils.ts ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isUserChanges = exports.isHeartBeat = void 0;
+/**
+ * 判断是否为心跳包
+ * @param data 包数据
+ */
+exports.isHeartBeat = function (data) {
+    if (data.length <= 2) {
+        return true;
+    }
+    return data.includes('HEART_BEAT');
+};
+/**
+ * 判断是否为 user changes
+ */
+exports.isUserChanges = function (data) {
+    return data.includes('USER_CHANGES');
+};
+
+
+/***/ }),
+
+/***/ "./src/panel/hooks/useBoolean.ts":
+/*!***************************************!*\
+  !*** ./src/panel/hooks/useBoolean.ts ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js");
+var useBoolean = function (originValue) {
+    if (originValue === void 0) { originValue = true; }
+    var _a = react_1.useState(originValue), value = _a[0], setValue = _a[1];
+    var toggle = react_1.useCallback(function () {
+        setValue(function (value) { return !value; });
+    }, [setValue]);
+    return { value: value, toggle: toggle, setValue: setValue };
+};
+exports.default = useBoolean;
+
+
+/***/ }),
+
 /***/ "./src/panel/hooks/useInput.tsx":
 /*!**************************************!*\
   !*** ./src/panel/hooks/useInput.tsx ***!
@@ -29357,6 +29709,59 @@ exports.default = useInput;
 
 /***/ }),
 
+/***/ "./src/panel/hooks/useSwitch.tsx":
+/*!***************************************!*\
+  !*** ./src/panel/hooks/useSwitch.tsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var switch_1 = __importDefault(__webpack_require__(/*! ../base/switch */ "./src/panel/base/switch/index.ts"));
+var useBoolean_1 = __importDefault(__webpack_require__(/*! ./useBoolean */ "./src/panel/hooks/useBoolean.ts"));
+var useSwitch = function (title, originValue) {
+    if (originValue === void 0) { originValue = true; }
+    var _a = useBoolean_1.default(originValue), value = _a.value, toggle = _a.toggle;
+    var SwitchCom = react_1.useMemo(function () {
+        return (react_1.default.createElement("div", { className: "switch", onClick: toggle },
+            react_1.default.createElement(switch_1.default, { title: title, value: value })));
+    }, [title, toggle, value]);
+    return {
+        value: value,
+        toggle: toggle,
+        SwitchCom: SwitchCom,
+    };
+};
+exports.default = useSwitch;
+
+
+/***/ }),
+
 /***/ "./src/panel/index.tsx":
 /*!*****************************!*\
   !*** ./src/panel/index.tsx ***!
@@ -29373,11 +29778,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/_react-dom@16.13.1@react-dom/index.js"));
 var Panel_1 = __importDefault(__webpack_require__(/*! ./Panel */ "./src/panel/Panel.tsx"));
+__webpack_require__(/*! ../style/base.less */ "./src/style/base.less");
 window.onload = function () {
     react_dom_1.default.render(react_1.default.createElement(Panel_1.default, null), document.getElementById('panel'));
-    chrome.devtools.inspectedWindow.eval('console.log(`inject`, injectData)');
 };
 
+
+/***/ }),
+
+/***/ "./src/style/base.less":
+/*!*****************************!*\
+  !*** ./src/style/base.less ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/_style-loader@1.2.1@style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!../../node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./base.less */ "./node_modules/_css-loader@4.3.0@css-loader/dist/cjs.js!./node_modules/_less-loader@7.0.1@less-loader/dist/cjs.js!./src/style/base.less");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
 
 /***/ })
 

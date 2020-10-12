@@ -6,11 +6,8 @@ const useSwitch = (title: string, originValue: boolean = true) => {
     const { value, toggle } = useBoolean(originValue);
     const SwitchCom = useMemo(() => {
         return (
-            <div className="switch">
+            <div className="switch" onClick={toggle}>
                 <Switch title={title} value={value} />
-                <button className="switch-button" onClick={toggle}>
-                    toggle
-                </button>
             </div>
         );
     }, [title, toggle, value]);

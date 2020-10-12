@@ -51,7 +51,33 @@ window.getActiveDatabase = function() {
     return getDatabase(sheetId, viewId);
 }
 
+/**
+ * 格式化 userChanges 为“易读”数据
+ * @param data 形如 42["post", "head"\n"body"] 的字符串
+ * @return changeset mutation[][] 二维数组
+ */
+function formatUserChanges(data: string) {
+    try {
+        const index = data.indexOf('\n');
+        const body = data.slice(index + 1, -2);
+        const parsedBody = JSON.parse(body);
+        return JSON.parse(parsedBody.changeset);
+    } catch (err) {
+        console.log('err', err);
+    }
+    
+}
+
 window.deserializeMutation = function (data: string) {
     console.log('deserializeMutation', data);
-    return window.SpreadsheetApp.tools.deserializeMutation.toString();
+    const changeSetArray = formatUserChanges(data);
+    const mutationArray = [];
+    changeSetArray.forEach(function (cs) {
+        // cs 是 mutation[]
+        cs.forEach(function(mutation) {
+            const result = window.SpreadsheetApp.tools.deserializeMutation(mutation);
+            mutationArray.push(result);
+        });
+    });
+    return mutationArray;
 };

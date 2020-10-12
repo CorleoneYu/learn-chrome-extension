@@ -19,9 +19,9 @@ export default function Panel() {
                     <DatabaseInfo />
                 </div>
             </div>
-            {/* <div className="ws-list-box">
+            <div className="ws-list-box">
                 <WsList />
-            </div> */}
+            </div>
         </div>
     );
 }

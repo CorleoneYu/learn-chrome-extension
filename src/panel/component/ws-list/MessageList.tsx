@@ -1,44 +1,55 @@
 import React, { useCallback } from 'react';
+import { isHeartBeat, isUserChanges } from './utils';
 
 export interface IMessageListProps {
     messageList: any[];
     showHeartBeat: boolean;
+    onlyUserChanges: boolean; // 仅显示 userChanges 优先级高于 showHeartBeat
+    onMutationChange: Function;
 }
 
-const formateData = (dataStr: string) => {
-    try {
-        const data = JSON.parse(dataStr.slice(11, -3));
-
-    } catch (err) {
-        console.error('err', err);
-        return dataStr;
+/**
+ * 是否可以进行反序列化
+ * 1. type 为 send
+ * 2. data 为 user change
+ * @param message 
+ */
+const canDeserialize = (message) => {
+    if (message.type === 'send' && isUserChanges(message.data)) {
+        return true;
     }
+
+    return false;
 }
+
 const MessageList = (props: IMessageListProps) => {
-    const { messageList, showHeartBeat } = props;
+    const { messageList, showHeartBeat, onlyUserChanges, onMutationChange } = props;
 
     const deserializeMutation = useCallback((message) => {
-        console.log('message', message.data);
         const data = message.data;
-        chrome.devtools.inspectedWindow.eval(`window.deserializeMutation('${data}')`, (result) => {
-            console.log('result');
-            console.log(result);
+        chrome.devtools.inspectedWindow.eval(`window.deserializeMutation('${data}')`, (mutationArray) => {
+            onMutationChange(mutationArray);
         });
-    }, []);
+    }, [onMutationChange]);
 
     /**
      * 根据条件是否展示该条 message
      */
     const showMessage = useCallback(
         (message: any) => {
-            // 心跳包信息长度为 1
-            if (message.data.length === 1 && !showHeartBeat) {
+            // user change 条件
+            if (onlyUserChanges && !isUserChanges(message.data)) {
+                return false;
+            }
+
+            // 心跳包条件
+            if (!showHeartBeat && isHeartBeat(message.data)) {
                 return false;
             }
 
             return true;
         },
-        [showHeartBeat],
+        [showHeartBeat, onlyUserChanges],
     );
 
     const renderData = useCallback(
@@ -49,7 +60,7 @@ const MessageList = (props: IMessageListProps) => {
                 <div className="message-item" key={message.time}>
                     <div className="message-type">type: {message.type}</div>
                     <div className="message-data">{message.data}</div>
-                    <button onClick={() => deserializeMutation(message)}>还原 mutation</button>
+                    {canDeserialize(message) && <button onClick={() => deserializeMutation(message)}>还原 mutation</button>}
                 </div>
             ) : null;
         },
