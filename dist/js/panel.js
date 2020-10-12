@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_4_3_0_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".input-box {\n  display: flex;\n  align-items: center;\n}\n.input-box .input-container {\n  margin-right: 10px;\n}\n", "",{"version":3,"sources":["webpack://src/panel/component/database-info/style.less"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,mBAAA;AACJ;AAHA;EAKQ,kBAAA;AACR","sourcesContent":[".input-box {\n    display: flex;\n    align-items: center;\n\n    .input-container {\n        margin-right: 10px;\n    }\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, ".input-box {\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n}\n.input-box .btn {\n  margin-left: 20px;\n}\n", "",{"version":3,"sources":["webpack://src/panel/component/database-info/style.less"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,mBAAA;EACA,mBAAA;AACJ;AAJA;EAMQ,iBAAA;AACR","sourcesContent":[".input-box {\n    display: flex;\n    align-items: center;\n    margin-bottom: 10px;\n\n    .btn {\n        margin-left: 20px;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -29117,19 +29117,78 @@ module.exports = function (list, options) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var cell_info_1 = __importDefault(__webpack_require__(/*! ./component/cell-info */ "./src/panel/component/cell-info/index.ts"));
 var ws_list_1 = __importDefault(__webpack_require__(/*! ./component/ws-list */ "./src/panel/component/ws-list/index.ts"));
 var database_info_1 = __importDefault(__webpack_require__(/*! ./component/database-info */ "./src/panel/component/database-info/index.ts"));
+var radio_group_1 = __importDefault(__webpack_require__(/*! ./base/radio-group */ "./src/panel/base/radio-group/index.ts"));
+/**
+ * 展示的模块
+ * 现为单选
+ */
+var CONTENT_TYPE;
+(function (CONTENT_TYPE) {
+    CONTENT_TYPE["DATABASE"] = "database";
+    CONTENT_TYPE["CELL"] = "cell";
+    CONTENT_TYPE["WEBSOCKET"] = "websocket";
+})(CONTENT_TYPE || (CONTENT_TYPE = {}));
+var content = [
+    {
+        value: CONTENT_TYPE.DATABASE,
+        label: 'database-info',
+    },
+    {
+        value: CONTENT_TYPE.CELL,
+        label: 'cell-info',
+    },
+    {
+        value: CONTENT_TYPE.WEBSOCKET,
+        label: 'websocket-info',
+    },
+];
 function Panel() {
+    var _a = react_1.useState(CONTENT_TYPE.DATABASE), contentType = _a[0], setType = _a[1];
+    var handleTypeChange = react_1.useCallback(function (value) {
+        setType(value);
+    }, [setType]);
     return (react_1.default.createElement("div", { className: "panel-container" },
-        react_1.default.createElement("div", { className: "doc-x" },
+        react_1.default.createElement(radio_group_1.default, { title: "show", onChange: handleTypeChange, options: content }),
+        react_1.default.createElement("div", { className: "sheet", style: {
+                display: contentType === CONTENT_TYPE.CELL ? 'block' : 'none',
+            } },
+            react_1.default.createElement("div", { className: "cell-info-box" },
+                react_1.default.createElement(cell_info_1.default, null))),
+        react_1.default.createElement("div", { className: "doc-x", style: {
+                display: contentType === CONTENT_TYPE.DATABASE ? 'block' : 'none',
+            } },
             react_1.default.createElement("div", { className: "database-list-box" },
                 react_1.default.createElement(database_info_1.default, null))),
-        react_1.default.createElement("div", { className: "ws-list-box" },
+        react_1.default.createElement("div", { className: "ws-list-box", style: {
+                display: contentType === CONTENT_TYPE.WEBSOCKET ? 'block' : 'none',
+            } },
             react_1.default.createElement(ws_list_1.default, null))));
 }
 exports.default = Panel;
@@ -29245,6 +29304,80 @@ exports.default = JsonEditor_1.default;
 
 /***/ }),
 
+/***/ "./src/panel/base/radio-group/RadioGroup.tsx":
+/*!***************************************************!*\
+  !*** ./src/panel/base/radio-group/RadioGroup.tsx ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var RadioGroup = function (props) {
+    var onChange = props.onChange, options = props.options, title = props.title, _a = props.defaultIndex, defaultIndex = _a === void 0 ? 0 : _a;
+    var defaultValue = options[defaultIndex].value;
+    var _b = react_1.useState(defaultValue), currentValue = _b[0], setValue = _b[1];
+    var handleChange = react_1.useCallback(function (index) {
+        var target = options[index];
+        setValue(target.value);
+        onChange(target.value);
+    }, [setValue, onChange, options]);
+    return (react_1.default.createElement("div", { className: "radio-group" },
+        react_1.default.createElement("div", { className: "title" },
+            title,
+            ": ",
+            currentValue),
+        react_1.default.createElement("div", { className: "radio-list" }, options.map(function (option, index) {
+            return (react_1.default.createElement("div", { className: "radio", key: option.value },
+                react_1.default.createElement("input", { type: "radio", name: title, value: option.value, onChange: function () { return handleChange(index); }, checked: option.value === currentValue }),
+                react_1.default.createElement("label", null, option.label)));
+        }))));
+};
+exports.default = RadioGroup;
+
+
+/***/ }),
+
+/***/ "./src/panel/base/radio-group/index.ts":
+/*!*********************************************!*\
+  !*** ./src/panel/base/radio-group/index.ts ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var RadioGroup_1 = __importDefault(__webpack_require__(/*! ./RadioGroup */ "./src/panel/base/radio-group/RadioGroup.tsx"));
+exports.default = RadioGroup_1.default;
+
+
+/***/ }),
+
 /***/ "./src/panel/base/switch/Switch.tsx":
 /*!******************************************!*\
   !*** ./src/panel/base/switch/Switch.tsx ***!
@@ -29286,6 +29419,87 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Switch_1 = __importDefault(__webpack_require__(/*! ./Switch */ "./src/panel/base/switch/Switch.tsx"));
 exports.default = Switch_1.default;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/cell-info/Info.tsx":
+/*!************************************************!*\
+  !*** ./src/panel/component/cell-info/Info.tsx ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/_react@16.13.1@react/index.js"));
+var json_editor_1 = __importDefault(__webpack_require__(/*! ../../base/json-editor */ "./src/panel/base/json-editor/index.ts"));
+var useInput_1 = __importDefault(__webpack_require__(/*! ../../hooks/useInput */ "./src/panel/hooks/useInput.tsx"));
+function CellInfo() {
+    var _a = react_1.useState(null), data = _a[0], setData = _a[1];
+    var _b = useInput_1.default(), row = _b[0], RowInput = _b[1];
+    var _c = useInput_1.default(), column = _c[0], ColumnInput = _c[1];
+    var searchData = react_1.useCallback(function () {
+        console.log('searchData', row, column);
+        chrome.devtools.inspectedWindow.eval("window.getCellData(" + row + ", " + column + ")", function (result) {
+            console.log('searchData received', result);
+            setData(result);
+        });
+    }, [row, column, setData]);
+    return (react_1.default.createElement("div", { className: "cell-info" },
+        react_1.default.createElement("div", { className: "input-box" },
+            react_1.default.createElement("div", { className: "input-container row-input-container" },
+                react_1.default.createElement("span", null, "\u884C: "),
+                RowInput),
+            react_1.default.createElement("div", { className: "input-container column-input-container" },
+                react_1.default.createElement("span", null, "\u5217: "),
+                ColumnInput),
+            react_1.default.createElement("button", { className: "search-btn", onClick: searchData }, "\u67E5\u8BE2")),
+        react_1.default.createElement(json_editor_1.default, { data: data })));
+}
+exports.default = CellInfo;
+
+
+/***/ }),
+
+/***/ "./src/panel/component/cell-info/index.ts":
+/*!************************************************!*\
+  !*** ./src/panel/component/cell-info/index.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Info_1 = __importDefault(__webpack_require__(/*! ./Info */ "./src/panel/component/cell-info/Info.tsx"));
+exports.default = Info_1.default;
 
 
 /***/ }),
@@ -29343,13 +29557,13 @@ function DatabaseInfo() {
             setData(result);
         });
     }, []);
-    return (react_1.default.createElement("div", { className: "cell-info" },
+    return (react_1.default.createElement("div", { className: "database-info" },
         react_1.default.createElement("div", { className: "input-box" },
             react_1.default.createElement("div", { className: "input-container row-input-container" },
                 react_1.default.createElement("span", null, "index: "),
                 IndexInput),
-            react_1.default.createElement("button", { className: "search-btn", onClick: searchDatabaseByIndex }, "\u67E5\u8BE2"),
-            react_1.default.createElement("button", { className: "search-active-btn", onClick: searchActiveDatabase }, "\u67E5\u8BE2 active \u89C6\u56FE")),
+            react_1.default.createElement("button", { className: "search-btn btn", onClick: searchDatabaseByIndex }, "\u67E5\u8BE2"),
+            react_1.default.createElement("button", { className: "search-active-btn btn", onClick: searchActiveDatabase }, "\u67E5\u8BE2 active \u89C6\u56FE")),
         react_1.default.createElement(json_editor_1.default, { data: data })));
 }
 exports.default = DatabaseInfo;

@@ -30,16 +30,16 @@ export default function DatabaseInfo() {
     }, []);
 
     return (
-        <div className="cell-info">
+        <div className="database-info">
             <div className="input-box">
                 <div className="input-container row-input-container">
                     <span>index: </span>
                     {IndexInput}
                 </div>
-                <button className="search-btn" onClick={searchDatabaseByIndex}>
+                <button className="search-btn btn" onClick={searchDatabaseByIndex}>
                     查询
                 </button>
-                <button className="search-active-btn" onClick={searchActiveDatabase}>
+                <button className="search-active-btn btn" onClick={searchActiveDatabase}>
                     查询 active 视图
                 </button>
             </div>
