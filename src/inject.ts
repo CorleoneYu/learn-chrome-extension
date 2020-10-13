@@ -76,6 +76,8 @@ window.deserializeMutation = function (data: string) {
         // cs 是 mutation[]
         cs.forEach(function(mutation) {
             const result = window.SpreadsheetApp.tools.deserializeMutation(mutation);
+            const name = result.constructor.name;
+            result.mutationName = name;
             mutationArray.push(result);
         });
     });
