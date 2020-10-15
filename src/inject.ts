@@ -23,8 +23,7 @@ window.getCellData = function (row: number, column: number) {
 
 function getDatabase(sheetId: string, viewId: string) {
     const sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
-    const viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view
-        .canvas.tableView.cellViews;
+    const viewData = window.SpreadsheetApp.view.canvas.tableView.cellViews;
     const viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
 
     console.log('getDatabase', sheetId, viewId, sheetData, viewData, viewOptions);
@@ -47,7 +46,7 @@ window.getDatabaseByIndex = function(index: number) {
 
 window.getActiveDatabase = function() {
     const sheetId = window.SpreadsheetApp.spreadsheet.getActiveSheetId();
-    const viewId = window.SpreadsheetApp.spreadsheet.viewManager.activeViewId;
+    const viewId = window.SpreadsheetApp.spreadsheet.viewManager.activeView.viewId;
     return getDatabase(sheetId, viewId);
 }
 

@@ -114,8 +114,7 @@ window.getCellData = function (row, column) {
 };
 function getDatabase(sheetId, viewId) {
     var sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
-    var viewData = window.SpreadsheetApp.databaseViewManager.stageManager.getDatabaseViewByViewId(viewId).subView.view
-        .canvas.tableView.cellViews;
+    var viewData = window.SpreadsheetApp.view.canvas.tableView.cellViews;
     var viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
     console.log('getDatabase', sheetId, viewId, sheetData, viewData, viewOptions);
     var msg = {
@@ -135,7 +134,7 @@ window.getDatabaseByIndex = function (index) {
 };
 window.getActiveDatabase = function () {
     var sheetId = window.SpreadsheetApp.spreadsheet.getActiveSheetId();
-    var viewId = window.SpreadsheetApp.spreadsheet.viewManager.activeViewId;
+    var viewId = window.SpreadsheetApp.spreadsheet.viewManager.activeView.viewId;
     return getDatabase(sheetId, viewId);
 };
 /**
