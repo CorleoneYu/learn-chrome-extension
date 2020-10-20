@@ -23,9 +23,13 @@ window.getCellData = function (row: number, column: number) {
 
 function getDatabase(sheetId: string, viewId: string) {
     const sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
-    const viewData = window.SpreadsheetApp.view.canvas.tableView.cellViews;
+    const canvas = window.SpreadsheetApp.databaseViewManager.getDatabaseViewByViewId(viewId).view.view.canvas;
+    const viewData = {
+        cellViews: canvas.tableView.cellViews,
+        rowData: canvas._rowcolAccessor._rowData,
+        areaTop: canvas._areaData._row._flow._areaTop,
+    };
     const viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
-
     console.log('getDatabase', sheetId, viewId, sheetData, viewData, viewOptions);
 
     const msg = {

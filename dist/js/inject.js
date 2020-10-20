@@ -114,7 +114,12 @@ window.getCellData = function (row, column) {
 };
 function getDatabase(sheetId, viewId) {
     var sheetData = window.SpreadsheetApp.spreadsheet.getSheetBySheetId(sheetId).data;
-    var viewData = window.SpreadsheetApp.view.canvas.tableView.cellViews;
+    var canvas = window.SpreadsheetApp.databaseViewManager.getDatabaseViewByViewId(viewId).view.view.canvas;
+    var viewData = {
+        cellViews: canvas.tableView.cellViews,
+        rowData: canvas._rowcolAccessor._rowData,
+        areaTop: canvas._areaData._row._flow._areaTop,
+    };
     var viewOptions = window.SpreadsheetApp.spreadsheet.viewManager.getViewByViewId(viewId);
     console.log('getDatabase', sheetId, viewId, sheetData, viewData, viewOptions);
     var msg = {
